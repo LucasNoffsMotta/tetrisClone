@@ -1,0 +1,3 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/BackGroundTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/BackGroundTile.xnb","TextureProcessor","Texture2DContent",156,4181,0.1154708
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/redSquare.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/redSquare.xnb","TextureProcessor","Texture2DContent",129,4181,0.0039931
