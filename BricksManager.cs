@@ -10,25 +10,37 @@ namespace Tetris
     public class BricksManager
     {
         private List<Brick> bricks;
+        private List<BrickConjunt> brickObjects;
         private Random random;
-        private Brick currentBrick;
+        private BrickConjunt currentBrick;
         private int brickIndex;
 
         public BricksManager()
         {
             random = new Random();
             bricks = new List<Brick>();
+            brickObjects = new List<BrickConjunt>();
             brickIndex = 0;
         }
+
 
         public void CreateBriks()
 
         {
-            for (int i =0; i < 5; i++)
+            for (int i = 0; i < 20; i++)
             {
-                bricks.Add(new(Globals.Content.Load<Texture2D>("redSquare"), new Vector2(random.Next(0, Globals.WindowSize.X), -64)));
+                brickObjects.Add(new());
             }
-            currentBrick = bricks[brickIndex];
+
+            for (int i = 0; i < brickObjects.Count; i++)
+            {
+                for (int j = 0; j < brickObjects[i].bricks.Count; j++)
+                {
+                    Debug.WriteLine("brick add");
+                    bricks.Add(brickObjects[i].bricks[j]);
+                }
+            }          
+            currentBrick = brickObjects[brickIndex];
         }
 
 
@@ -41,9 +53,10 @@ namespace Tetris
                 {
                     CreateBriks();
                 }
-                currentBrick = bricks[brickIndex];
+                currentBrick = brickObjects[brickIndex]; ;
             }
         }
+
   
         public void Draw()
         {
@@ -56,24 +69,22 @@ namespace Tetris
 
         public void CheckCoilision(Square[,] PlayField)
         {
-            for (int i = 0; i < bricks.Count; i++)
+            for (int i = 0; i < brickObjects.Count; i++)
             {
-                if (i != brickIndex) { currentBrick.CheckRectColision(bricks[i].Rectangle, PlayField); }           
+                for (int j = 0; j < brickObjects[i].bricks.Count; j++)
+                {
+                    brickObjects[i].bricks[j].CheckRectColision(PlayField);
+                }
             }
         }
+
 
         public void Update(Square[,] PlayField, Point Size)
         {
             ManageBricks();
             CheckCoilision(PlayField);
  
-            if (currentBrick.alive) { currentBrick.Update(PlayField); }
-
-            Debug.WriteLine($"First rect - X = {bricks[0].Rectangle.X.ToString()} // Y = {bricks[0].Rectangle.Y.ToString()} - Alive = {bricks[0].alive}");
-            Debug.WriteLine($"Second rect - X = {bricks[1].Rectangle.X.ToString()} // Y = {bricks[1].Rectangle.Y.ToString()} - Alive = {bricks[1].alive}");
-            Debug.WriteLine($"Third rect - X = {bricks[2].Rectangle.X.ToString()} // Y = {bricks[2].Rectangle.Y.ToString()} - Alive = {bricks[2].alive}");
-            Debug.WriteLine("\n");
-
+            if (currentBrick.alive) { currentBrick.Update(PlayField, Size); }
         }
     }
 

@@ -25,8 +25,18 @@ namespace Tetris
 
         public void Draw()
         {
-            Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
-            //Globals.SpriteBatch.Draw(Texture, Rectangle, null, Color.White, 0f,  Origin, SpriteEffects.None, 0f);
+            if (!ocupied)
+            {
+                //Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
+
+                Globals.SpriteBatch.Draw(Texture, Rectangle, Color.White);
+            }
+            else
+            {
+                
+                //Globals.SpriteBatch.Draw(Texture, Position, null, Color.Yellow, 0f, Origin, 1f, SpriteEffects.None, 0f);
+                Globals.SpriteBatch.Draw(Texture, Rectangle, Color.Yellow);
+            }
         }
 
     }
