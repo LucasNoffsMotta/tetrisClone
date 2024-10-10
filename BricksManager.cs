@@ -27,7 +27,7 @@ namespace Tetris
         public void CreateBriks()
 
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 1d; i++)
             {
                 brickObjects.Add(new());
             }
@@ -36,7 +36,6 @@ namespace Tetris
             {
                 for (int j = 0; j < brickObjects[i].bricks.Count; j++)
                 {
-                    Debug.WriteLine("brick add");
                     bricks.Add(brickObjects[i].bricks[j]);
                 }
             }          
@@ -47,14 +46,29 @@ namespace Tetris
         public void ManageBricks()
         {
             if (!currentBrick.alive)
-            { 
-                if (brickIndex != bricks.Count - 1) { brickIndex += 1; }
-                else
+            {
+                try
+                {
+                    brickIndex += 1;
+                    currentBrick = brickObjects[brickIndex];
+                }
+
+                catch ( System.ArgumentOutOfRangeException )
                 {
                     CreateBriks();
+                    currentBrick = brickObjects[brickIndex];
                 }
-                currentBrick = brickObjects[brickIndex]; ;
+
             }
+
+            //{ 
+            //    if (brickIndex != bricks.Count - 1) { brickIndex += 1; }
+            //    else
+            //    {
+            //        CreateBriks();
+            //    }
+            ////    currentBrick = brickObjects[brickIndex]; ;
+            //}
         }
 
   

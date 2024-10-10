@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/BackGroundTile.png</SourceFile>
-  <SourceTime>2024-10-06T23:19:45.7749686-07:00</SourceTime>
-  <DestFile>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/BackGroundTile.xnb</DestFile>
-  <DestTime>2024-10-09T18:04:31.7526703-07:00</DestTime>
+  <SourceFile>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/greenTile.png</SourceFile>
+  <SourceTime>2024-10-09T17:58:27.202194-07:00</SourceTime>
+  <DestFile>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/Content/greenTile.xnb</DestFile>
+  <DestTime>2024-10-09T18:08:29.8314756-07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T10:05:56-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
