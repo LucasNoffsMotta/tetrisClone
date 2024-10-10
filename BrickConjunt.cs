@@ -27,7 +27,6 @@ namespace Tetris
         public bool canMoveRight;
 
 
-
         public BrickConjunt()
         {
             random = new Random();
@@ -41,69 +40,16 @@ namespace Tetris
 
         public void CreateBricks(char brickType)
         {
-            if (brickType == 'O')
-            {
-                bricks.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos, 1))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos + 1, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos + 1, 1))));
-            }
-
-            if (brickType == 'I')
-            { 
-                bricks.Add((new(Globals.Content.Load<Texture2D>("blueSquare"), new Vector2(initialPos+1, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("blueSquare"), new Vector2(initialPos+2, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("blueSquare"), new Vector2(initialPos+3, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("blueSquare"), new Vector2(initialPos+4, 0))));
-            }
-
-            if (brickType == 'L')
-            {
-                bricks.Add((new(Globals.Content.Load<Texture2D>("orangeTile"), new Vector2(initialPos, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("orangeTile"), new Vector2(initialPos, 1))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("orangeTile"), new Vector2(initialPos, 2))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("orangeTile"), new Vector2(initialPos + 1, 0))));
-            }
-
-            if (brickType == 'J')
-            {
-                bricks.Add((new(Globals.Content.Load<Texture2D>("pinkTile"), new Vector2(initialPos, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("pinkTile"), new Vector2(initialPos, 1))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("pinkTile"), new Vector2(initialPos, 2))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("pinkTile"), new Vector2(initialPos - 1, 0))));
-            }
-
-            if (brickType == 'T')
-            {
-                bricks.Add((new(Globals.Content.Load<Texture2D>("darkBluTile"), new Vector2(initialPos, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("darkBluTile"), new Vector2(initialPos, 1))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("darkBluTile"), new Vector2(initialPos + 1, 1))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("darkBluTile"), new Vector2(initialPos - 1, 1))));
-            }
-
-
-            if (brickType == 'Z')
-            {
-                bricks.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos,0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos, 1))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos + 1, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos - 1, 1))));
-            }
-
-            if (brickType == 'S')
-            {
-                bricks.Add((new(Globals.Content.Load<Texture2D>("redSquare"), new Vector2(initialPos, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("redSquare"), new Vector2(initialPos, 1))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("redSquare"), new Vector2(initialPos - 1, 0))));
-                bricks.Add((new(Globals.Content.Load<Texture2D>("redSquare"), new Vector2(initialPos + 1, 1))));
-            }
+            bricks = CreateObjects.ObjectsFactory(brickType, initialPos, bricks);
         }
+
 
         public (int _leftBound, int _rightBound, int _topBound) GetBounds()
         {
             _leftBound = bricks[0].Rectangle.X;
             _rightBound = bricks[0].Rectangle.Right;
             _topBound = bricks[0].Rectangle.Top;
+
             for (int i = 0; i < bricks.Count; i++)
             {
                 if (bricks[i].Rectangle.X < _leftBound) { _leftBound = bricks[i].Rectangle.X;}
@@ -111,6 +57,7 @@ namespace Tetris
                 if (bricks[i].Rectangle.Top < _topBound) { _topBound = bricks[i].Rectangle.Top; }
             }
             return (_leftBound, _rightBound, _topBound);
+
         }
 
 
@@ -122,6 +69,7 @@ namespace Tetris
             }
         }
 
+
         public void UpdateOcupiedFields(Square[,] PlayField, Point Size)
         {
 
@@ -130,6 +78,7 @@ namespace Tetris
                 PlayField[bricks[i].mapPos.x, bricks[i].mapPos.y].ocupied = true;
             }
         }
+
 
         public void CheckIfCanMove(Square[,] PlayField)
         {
@@ -172,12 +121,11 @@ namespace Tetris
             }          
         }
 
+
         public void Update(Square[,] PlayField, Point Size)
-        {
-            
+        {            
             (_leftBound, _rightBound, _topBound) = GetBounds();
             CheckIfCanMove(PlayField);
-
 
             for (int i = 0; i < bricks.Count; i++)
             {
@@ -185,21 +133,5 @@ namespace Tetris
             }
             CheckFallColision(PlayField, Size);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
