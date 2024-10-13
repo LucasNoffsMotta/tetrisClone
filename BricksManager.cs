@@ -10,16 +10,16 @@ namespace Tetris
     public class BricksManager
     {
         private List<Brick> bricks;
-        private List<BrickConjunt> brickObjects;
+        private List<Tetromines> brickObjects;
         private Random random;
-        private BrickConjunt currentBrick;
+        private Tetromines currentBrick;
         private int brickIndex;
 
         public BricksManager()
         {
             random = new Random();
             bricks = new List<Brick>();
-            brickObjects = new List<BrickConjunt>();
+            brickObjects = new List<Tetromines>();
             brickIndex = 0;
         }
 

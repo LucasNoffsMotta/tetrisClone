@@ -34,6 +34,8 @@ namespace Tetris
             Rectangle.X = (int)Position.X * 32; Rectangle.Y = (int)Position.Y * 32;
             alive = true;
             coliding = false;
+            mapPos.x = Rectangle.X / 32;
+            mapPos.y = Rectangle.Y / 32;
         }
 
 
@@ -42,6 +44,7 @@ namespace Tetris
             fallTrigger += fallCount;
             if (fallTrigger >= fallSpeed) { Rectangle.Y += 32; fallTrigger = 0; }
         }
+
 
         public void Fall()
         {
@@ -54,10 +57,9 @@ namespace Tetris
 
             else if (InputManager.KeybordPressed.IsKeyUp(Keys.S))
             {
-                fallCount = 0.1f;
+                fallCount = 0.0000000001f;
             }
         }
-
 
         public void MoveTimer()
         {
@@ -70,26 +72,23 @@ namespace Tetris
                     
             if (InputManager.KeybordPressed.IsKeyDown(Keys.A) && !moveCounting && fallCount != 0.5f)
             {
-                if (Rectangle.X > 0 && Rectangle.Y > 0)
-                {
+               
                     if (canMoveLeft)
                     {
                         Rectangle.X -= 32;
                         moveCounting = true;
                     }
-                }                
+                            
             }
 
             else if (InputManager.KeybordPressed.IsKeyDown(Keys.D) && !moveCounting && fallCount != 0.5f)
             {
-                if (Rectangle.Right < Globals.WindowSize.X && Rectangle.Y > 0)
-                {
+                
                     if (canMoveRight)
                     {
                         Rectangle.X += 32;
                         moveCounting = true;
-                    }
-                }
+                    }           
             }
         }
 
@@ -109,8 +108,7 @@ namespace Tetris
             if (Rectangle.Y > 32)
             {
                 if (PlayField[Rectangle.X / 32, Rectangle.Y / 32 + 1].ocupied)
-                {
-                   
+                {                
                     coliding = true;
                 }
             }           
