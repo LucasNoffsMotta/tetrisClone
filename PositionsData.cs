@@ -23,9 +23,14 @@ namespace Tetris
             if (typeOfObject == 'O')
             {
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos, -2))));
-                emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos + 1, -2))));
-                emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos + 1, -2))));
+                emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos , -3))));
+                emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos + 1, -3))));
+
+                //emptyList[0].boxPosition.X = 1; emptyList[0].boxPosition.Y = 0;
+                //emptyList[1].boxPosition.X = 2; emptyList[1].boxPosition.Y = 0;
+                //emptyList[2].boxPosition.X = 1; emptyList[2].boxPosition.Y = 1;
+                //emptyList[3].boxPosition.X = 2; emptyList[3].boxPosition.Y = 1;
             }
 
             if (typeOfObject == 'I')
@@ -34,7 +39,11 @@ namespace Tetris
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("blueSquare"), new Vector2(initialPos + 1, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("blueSquare"), new Vector2(initialPos + 2, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("blueSquare"), new Vector2(initialPos + 3, -2))));
-                
+
+                emptyList[0].boxPosition.X = 0; emptyList[0].boxPosition.Y = 1;
+                emptyList[1].boxPosition.X = 1; emptyList[1].boxPosition.Y = 1;
+                emptyList[2].boxPosition.X = 2; emptyList[2].boxPosition.Y = 1;
+                emptyList[3].boxPosition.X = 3; emptyList[3].boxPosition.Y = 1;
             }
 
             if (typeOfObject == 'L')
@@ -43,22 +52,39 @@ namespace Tetris
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("orangeTile"), new Vector2(initialPos + 1, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("orangeTile"), new Vector2(initialPos + 2, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("orangeTile"), new Vector2(initialPos + 2, -3))));
+
+                emptyList[0].boxPosition.X = 0; emptyList[0].boxPosition.Y = 1;
+                emptyList[1].boxPosition.X = 1; emptyList[1].boxPosition.Y = 1;
+                emptyList[2].boxPosition.X = 2; emptyList[2].boxPosition.Y = 1;
+                emptyList[3].boxPosition.X = 2; emptyList[3].boxPosition.Y = 0;
             }
+
 
             if (typeOfObject == 'J')
             {
-                emptyList.Add((new(Globals.Content.Load<Texture2D>("pinkTile"), new Vector2(initialPos, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("pinkTile"), new Vector2(initialPos, -3))));
+                emptyList.Add((new(Globals.Content.Load<Texture2D>("pinkTile"), new Vector2(initialPos, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("pinkTile"), new Vector2(initialPos + 1, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("pinkTile"), new Vector2(initialPos + 2, -2))));
+
+                emptyList[0].boxPosition.X = 0; emptyList[0].boxPosition.Y = 0;
+                emptyList[1].boxPosition.X = 0; emptyList[1].boxPosition.Y = 1;
+                emptyList[2].boxPosition.X = 1; emptyList[2].boxPosition.Y = 1;
+                emptyList[3].boxPosition.X = 2; emptyList[3].boxPosition.Y = 1;
             }
+
 
             if (typeOfObject == 'T')
             {
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("darkBluTile"), new Vector2(initialPos, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("darkBluTile"), new Vector2(initialPos + 1, -2))));
-                emptyList.Add((new(Globals.Content.Load<Texture2D>("darkBluTile"), new Vector2(initialPos + 2, -3))));
+                emptyList.Add((new(Globals.Content.Load<Texture2D>("darkBluTile"), new Vector2(initialPos + 1, -3))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("darkBluTile"), new Vector2(initialPos + 2, -2))));
+
+                emptyList[0].boxPosition.X = 0; emptyList[0].boxPosition.Y = 1;
+                emptyList[1].boxPosition.X = 1; emptyList[1].boxPosition.Y = 1;
+                emptyList[2].boxPosition.X = 1; emptyList[2].boxPosition.Y = 0;
+                emptyList[3].boxPosition.X = 2; emptyList[3].boxPosition.Y = 1;
             }
 
             if (typeOfObject == 'Z')
@@ -67,6 +93,12 @@ namespace Tetris
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos + 1, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos + 1,-3))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos + 2, -3))));
+
+                emptyList[0].boxPosition.X = 0; emptyList[0].boxPosition.Y = 1;
+                emptyList[1].boxPosition.X = 1; emptyList[1].boxPosition.Y = 1;
+                emptyList[2].boxPosition.X = 1; emptyList[2].boxPosition.Y = 0;
+                emptyList[3].boxPosition.X = 2; emptyList[3].boxPosition.Y = 0;
+
             }
 
             if (typeOfObject == 'S')
@@ -75,68 +107,38 @@ namespace Tetris
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("redSquare"), new Vector2(initialPos + 1, -3))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("redSquare"), new Vector2(initialPos + 1, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("redSquare"), new Vector2(initialPos + 2, -2))));
+
+                emptyList[0].boxPosition.X = 0; emptyList[0].boxPosition.Y = 0;
+                emptyList[1].boxPosition.X = 1; emptyList[1].boxPosition.Y = 0;
+                emptyList[2].boxPosition.X = 1; emptyList[2].boxPosition.Y = 1;
+                emptyList[3].boxPosition.X = 2; emptyList[3].boxPosition.Y = 1;
             }
             return emptyList;
         }
 
-        public static List<Brick> ObjectRotate(List<Brick> bricks)
+        public static void ObjectRotate(List<Brick> bricks, Point[,] boundBox, int boxSize)
         {
+
             int x2;
             int y2;
 
             for (int i = 0; i < bricks.Count; i++)
             {
-                x2 = (bricks[i].Rectangle.Y);
-                y2 = (4 * 32 - (Globals.WindowSize.X - bricks[i].Rectangle.X));
-                bricks[i].Rectangle.X = x2;
-                bricks[i].Rectangle.Y = y2;
+                x2 = (bricks[i].boxPosition.Y);
+                y2 = ((boxSize - 1) - bricks[i].boxPosition.X);
+
+                bricks[i].boxPosition.X = x2;
+                bricks[i].boxPosition.Y = y2;          
             }
 
-            return bricks;
-
-        }
-
-
-        public static void RotatePositions(char typeOfObject, Point origin, int rotationStates)
-        {
-     
-            if (typeOfObject == 'I')
+            for (int i = 0; i < bricks.Count; i++)
             {
-
-                if (rotationStates == 0)
-                {
-                    rotations.Add(new((origin.X) * 32, (origin.Y - 2) * 32));
-                    rotations.Add(new((origin.X) * 32, (origin.Y - 1) * 32));
-                    rotations.Add(new((origin.X) * 32, (origin.Y) * 32));
-                    rotations.Add(new((origin.X) * 32, (origin.Y + 1) * 32));
-                }
-
-                if (rotationStates == 1)
-                {
-                    rotations.Add(new((origin.X - 2) * 32, (origin.Y) * 32));
-                    rotations.Add(new((origin.X - 1) * 32, (origin.Y) * 32));
-                    rotations.Add(new((origin.X) * 32, (origin.Y) * 32));
-                    rotations.Add(new((origin.X + 1) * 32, (origin.Y) * 32));
-                }
-
-                if (rotationStates == 2)
-                {
-                    rotations.Add(new((origin.X) * 32, (origin.Y - 2) * 32));
-                    rotations.Add(new((origin.X) * 32, (origin.Y - 1) * 32));
-                    rotations.Add(new((origin.X) * 32, (origin.Y) * 32));
-                    rotations.Add(new((origin.X) * 32, (origin.Y + 1) * 32));
-                }
-
-                if (rotationStates == 3)
-                {
-                    rotations.Add(new((origin.X - 2) * 32, (origin.Y) * 32));
-                    rotations.Add(new((origin.X - 1) * 32, (origin.Y) * 32));
-                    rotations.Add(new((origin.X) * 32, (origin.Y) * 32));
-                    rotations.Add(new((origin.X + 1) * 32, (origin.Y) * 32));
-                }
-
-
+                bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
+                bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
             }
+
         }
+
+
     }
 }

@@ -97,7 +97,7 @@ namespace Tetris
         {
             ManageBricks();
             CheckCoilision(PlayField);
- 
+
             if (currentBrick.alive) { currentBrick.Update(PlayField, Size); }
         }
     }
