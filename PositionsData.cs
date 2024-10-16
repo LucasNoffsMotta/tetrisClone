@@ -15,8 +15,6 @@ namespace Tetris
     public static class CreateObjects
     {
         public static List<Point> rotations = new List<Point>();
-        //public static Dictionary<string, List<Point>> rotationValues = new Dictionary<string, List<Point>>();
-        
 
         public static List<Brick> ObjectsFactory(char typeOfObject, int initialPos, List<Brick> emptyList)
         {
@@ -27,10 +25,6 @@ namespace Tetris
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos , -3))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos + 1, -3))));
 
-                //emptyList[0].boxPosition.X = 1; emptyList[0].boxPosition.Y = 0;
-                //emptyList[1].boxPosition.X = 2; emptyList[1].boxPosition.Y = 0;
-                //emptyList[2].boxPosition.X = 1; emptyList[2].boxPosition.Y = 1;
-                //emptyList[3].boxPosition.X = 2; emptyList[3].boxPosition.Y = 1;
             }
 
             if (typeOfObject == 'I')
@@ -98,7 +92,6 @@ namespace Tetris
                 emptyList[1].boxPosition.X = 1; emptyList[1].boxPosition.Y = 1;
                 emptyList[2].boxPosition.X = 1; emptyList[2].boxPosition.Y = 0;
                 emptyList[3].boxPosition.X = 2; emptyList[3].boxPosition.Y = 0;
-
             }
 
             if (typeOfObject == 'S')
@@ -116,29 +109,107 @@ namespace Tetris
             return emptyList;
         }
 
-        public static void ObjectRotate(List<Brick> bricks, Point[,] boundBox, int boxSize)
+        public static void CounterClockRotate(List<Brick> bricks, Point[,] boundBox, int boxSize, Square[,] PlayField)
         {
-
             int x2;
             int y2;
+            bool canRotate = true;
+            int testX;
+            int testY;
 
             for (int i = 0; i < bricks.Count; i++)
             {
                 x2 = (bricks[i].boxPosition.Y);
                 y2 = ((boxSize - 1) - bricks[i].boxPosition.X);
 
-                bricks[i].boxPosition.X = x2;
-                bricks[i].boxPosition.Y = y2;          
+                testX = boundBox[x2, y2].X;
+                testY = boundBox[x2, y2].Y;
+
+                if (PlayField[testX, testY].ocupied)
+                {
+                    canRotate = false; break;   
+                }
             }
+
+            
+            if (canRotate)
+            {
+                for (int i = 0; i < bricks.Count; i++)
+                {
+                    x2 = (bricks[i].boxPosition.Y);
+                    y2 = ((boxSize - 1) - bricks[i].boxPosition.X);
+
+                    bricks[i].boxPosition.X = x2;
+                    bricks[i].boxPosition.Y = y2;
+                }
+
+                for (int i = 0; i < bricks.Count; i++)
+                {
+                    bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
+                    bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
+                }
+            }
+        }
+
+        public static void ClockWiseRotate(List<Brick> bricks, Point[,] boundBox, int boxSize, Square[,] PlayField)
+        {
+
+            int x2;
+            int y2;
+            bool canRotate = true;
+            int testX;
+            int testY;
 
             for (int i = 0; i < bricks.Count; i++)
             {
-                bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
-                bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
+                x2 = ((boxSize - 1) - bricks[i].boxPosition.Y);
+                y2 = (bricks[i].boxPosition.X);
+
+                testX = boundBox[x2, y2].X;
+                testY = boundBox[x2, y2].Y;
+
+                if (PlayField[testX, testY].ocupied)
+                {
+                    canRotate = false; break;
+                }
             }
 
+
+            if (canRotate)
+            {
+                for (int i = 0; i < bricks.Count; i++)
+                {
+                    x2 = ((boxSize - 1) - bricks[i].boxPosition.Y);
+                    y2 = (bricks[i].boxPosition.X);
+
+                    bricks[i].boxPosition.X = x2;
+                    bricks[i].boxPosition.Y = y2;
+                }
+
+                for (int i = 0; i < bricks.Count; i++)
+                {
+                    bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
+                    bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
+                }
+            }
+
+            //int x2;
+            //int y2;
+
+            //for (int i = 0; i < bricks.Count; i++)
+            //{              
+            //    x2 = ((boxSize - 1) - bricks[i].boxPosition.Y);
+            //    y2 = (bricks[i].boxPosition.X);
+
+            //    bricks[i].boxPosition.X = x2;
+            //    bricks[i].boxPosition.Y = y2;
+            //}
+
+            //for (int i = 0; i < bricks.Count; i++)
+            //{
+            //    bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
+            //    bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
+            //}
         }
-
-
     }
 }

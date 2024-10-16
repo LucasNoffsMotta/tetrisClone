@@ -41,7 +41,6 @@ namespace Tetris
         private float sideMoveCount;
         private bool moveCounting;
 
-
         public Tetromines()
         {
             random = new Random();
@@ -58,7 +57,6 @@ namespace Tetris
             fallCount = 0.1f;
             sideMoveTimer = 0.5f;
             sideMoveCount = 0;
-            Debug.WriteLine(bricks.Count);
             if (bricktype != 'O') { CreateBoundBox(); }          
         }
 
@@ -86,8 +84,6 @@ namespace Tetris
             }
         }
 
- 
-       
         public void CreateBricks(char brickType)
         {
             bricks = CreateObjects.ObjectsFactory(brickType, initialPos, bricks);             
@@ -153,7 +149,6 @@ namespace Tetris
 
         public void MoveSides(Square[,] PlayField, bool canMoveLeft, bool canMoveRight)
         {
-
             if (InputManager.KeybordPressed.IsKeyDown(Keys.A) && !moveCounting && fallCount != 0.5f)
             {
                 if (canMoveLeft)
@@ -167,7 +162,7 @@ namespace Tetris
                     {
                         for (int j = 0; j < boxSize; j++)
                         {
-                            boundBox[i, j].X--;
+                            boundBox[i, j].X--;                        
                         }
                     }
                     moveCounting = true;
@@ -176,7 +171,6 @@ namespace Tetris
 
             else if (InputManager.KeybordPressed.IsKeyDown(Keys.D) && !moveCounting && fallCount != 0.5f)
             {
-
                 if (canMoveRight)
                 {
                     for (int i = 0; i < bricks.Count; i++)
@@ -191,6 +185,7 @@ namespace Tetris
                             boundBox[i, j].X++;
                         }
                     }
+
                     moveCounting = true;
                 }
             }
@@ -228,7 +223,6 @@ namespace Tetris
                 }
             }
 
-
             if (canMoveDown)
             {
                 for (int i = 0; i < bricks.Count;i++)
@@ -250,11 +244,9 @@ namespace Tetris
         public void CheckIfCanMove(Square[,] PlayField)
         { 
             for (int i = 0; i < bricks.Count; i++)
-            {
-                
+            {              
                 if (bricks[i].mapPos.y > 0)
                 {
-
                     if (_leftBound > 0)
                     {
                         if (PlayField[_leftBound / 32 - 1, bricks[i].Rectangle.Y / 32].ocupied == true)
@@ -268,7 +260,6 @@ namespace Tetris
                             canMoveLeft = true;
                         }
                     }
-
 
                     if (_rightBound < Globals.WindowSize.X)
                     {
@@ -286,10 +277,7 @@ namespace Tetris
 
                     if (_leftBound == 0) { canMoveLeft = false; }
                     if (_rightBound == Globals.WindowSize.X) { canMoveRight = false; }
-
-
-                }
-                                
+                }                              
             }          
         }
 
@@ -299,14 +287,23 @@ namespace Tetris
             if (rotationTimer >= rotationTimerLimit) { timerCounting = false; rotationTimer = 0; }
         }
 
-        public void Rotate()
+        public void Rotate(Square[,] PlayField)
         {
             if (bricktype != 'O')
             {
-                if (InputManager.KeybordPressed.IsKeyDown(Keys.Z) && !timerCounting)
+                if (boundBox[boxSize - 1, 0].X < Globals.WindowSize.X / 32 && (boundBox[0, 0].X >= 0))
                 {
-                    timerCounting = true;
-                    CreateObjects.ObjectRotate(bricks, boundBox, boxSize);
+                    if (InputManager.KeybordPressed.IsKeyDown(Keys.C) && !timerCounting)
+                    {
+                        timerCounting = true;
+                        CreateObjects.ClockWiseRotate(bricks, boundBox, boxSize, PlayField);
+                    }
+                
+                    if (InputManager.KeybordPressed.IsKeyDown(Keys.Z) && !timerCounting)
+                    {
+                        timerCounting = true;
+                        CreateObjects.CounterClockRotate(bricks, boundBox, boxSize, PlayField);
+                    }
                 }
             }               
         }
@@ -320,7 +317,8 @@ namespace Tetris
             Fall();
             MoveTimerSides();
             MoveSides(PlayField, canMoveLeft, canMoveRight);
-            Rotate();
+           
+            Rotate(PlayField);
             for (int i = 0; i < bricks.Count; i++)
             {
                 bricks[i].Update(PlayField, canMoveLeft, canMoveRight);

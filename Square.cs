@@ -9,7 +9,7 @@ namespace Tetris
     {
         
         public Vector2 Position { get; set; }
-        protected Texture2D Texture;
+        public  Texture2D Texture;
         public bool ocupied { get; set; }
         public Vector2 Origin { get; set; }
         public Rectangle Rectangle;
