@@ -17,6 +17,7 @@ namespace Tetris
         public Point boxPosition;
 
 
+
         public Brick(Texture2D Texture, Vector2 Position) : base(Texture, Position)
         {
             this.Texture = Texture;
@@ -36,8 +37,6 @@ namespace Tetris
                 alive = false;
             }          
         }
-
-
 
         public void CheckRectColision(Square[,] PlayField)
 

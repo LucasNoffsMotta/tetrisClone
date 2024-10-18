@@ -77,20 +77,21 @@ namespace Tetris
                 }
             }
 
-            for (int k = 0; k < bricks.Count; k++)
-            {
-                if (bricks[k].mapPos.y < line)
-                {
-                    bricks[k].Rectangle.Y += 32;
-                    break;
-                }
-            }
+            //for (int k = 0; k < bricks.Count; k++)
+            //{
+            //    if (bricks[k].mapPos.y < line)
+            //    {
+            //        bricks[k].Rectangle.Y += 32;
+            //        break;
+            //    }
+            //}
         }
 
 
         public void CheckFullLines(Square[,] PlayField, Point Size)
         {
             int lineToBeCleaned;
+
             for (int i = 0; i < Size.Y; i++)
             {
                 if (PlayField[0, i].ocupied && PlayField[1, i].ocupied && PlayField[2, i].ocupied &&

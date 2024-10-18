@@ -40,6 +40,8 @@ namespace Tetris
         private float sideMoveTimer;
         private float sideMoveCount;
         private bool moveCounting;
+        bool rotateClock = true;
+        bool rotateCounter = true;
 
         public Tetromines()
         {
@@ -291,21 +293,32 @@ namespace Tetris
         {
             if (bricktype != 'O')
             {
+                CheckRotationCondition(PlayField);
+
                 if (boundBox[boxSize - 1, 0].X < Globals.WindowSize.X / 32 && (boundBox[0, 0].X >= 0))
                 {
-                    if (InputManager.KeybordPressed.IsKeyDown(Keys.C) && !timerCounting)
-                    {
-                        timerCounting = true;
+                    if (InputManager.KeybordPressed.IsKeyDown(Keys.C) && !timerCounting && rotateClock)
+                    {                      
                         CreateObjects.ClockWiseRotate(bricks, boundBox, boxSize, PlayField);
+                        timerCounting = true;
                     }
                 
-                    if (InputManager.KeybordPressed.IsKeyDown(Keys.Z) && !timerCounting)
-                    {
+                    if (InputManager.KeybordPressed.IsKeyDown(Keys.Z) && !timerCounting && rotateCounter)
+                    {                     
+                        CreateObjects.CounterWiseRotate(bricks, boundBox, boxSize, PlayField);
                         timerCounting = true;
-                        CreateObjects.CounterClockRotate(bricks, boundBox, boxSize, PlayField);
                     }
                 }
             }               
+        }
+
+        public void CheckRotationCondition(Square[,] PlayField)
+        {
+            if (bricktype != 'O')
+            {
+                rotateClock = CreateObjects.CheckRotationCoordinates(bricks, "clock", rotateClock, boundBox, boxSize, PlayField);
+                rotateCounter = CreateObjects.CheckRotationCoordinates(bricks, "counter", rotateClock, boundBox, boxSize, PlayField);
+            }
         }
 
         public void Update(Square[,] PlayField, Point Size)
@@ -317,13 +330,21 @@ namespace Tetris
             Fall();
             MoveTimerSides();
             MoveSides(PlayField, canMoveLeft, canMoveRight);
-           
             Rotate(PlayField);
+            Debug.WriteLine(rotateClock);
+            Debug.WriteLine(rotateCounter);
+            rotateClock = true;
+            rotateCounter = true;
+
+
             for (int i = 0; i < bricks.Count; i++)
             {
                 bricks[i].Update(PlayField, canMoveLeft, canMoveRight);
             }
+
+
             CheckFallColision(PlayField, Size);
+          
         }
     }
 }

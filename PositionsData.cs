@@ -22,7 +22,7 @@ namespace Tetris
             {
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos + 1, -2))));
-                emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos , -3))));
+                emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos, -3))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("yellowTile"), new Vector2(initialPos + 1, -3))));
 
             }
@@ -85,7 +85,7 @@ namespace Tetris
             {
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos, -2))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos + 1, -2))));
-                emptyList.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos + 1,-3))));
+                emptyList.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos + 1, -3))));
                 emptyList.Add((new(Globals.Content.Load<Texture2D>("greenTile"), new Vector2(initialPos + 2, -3))));
 
                 emptyList[0].boxPosition.X = 0; emptyList[0].boxPosition.Y = 1;
@@ -109,107 +109,90 @@ namespace Tetris
             return emptyList;
         }
 
-        public static void CounterClockRotate(List<Brick> bricks, Point[,] boundBox, int boxSize, Square[,] PlayField)
+
+        public static bool CheckRotationCoordinates(List<Brick> bricks, string orientation, bool canRotate, Point[,] boundBox, int boxSize, Square[,] PlayField)
         {
-            int x2;
-            int y2;
-            bool canRotate = true;
-            int testX;
-            int testY;
+            int clockx2 = 0;
+            int clocky2 = 0;
+            int clocktestX = 0;
+            int clocktestY = 0;
 
             for (int i = 0; i < bricks.Count; i++)
             {
-                x2 = (bricks[i].boxPosition.Y);
-                y2 = ((boxSize - 1) - bricks[i].boxPosition.X);
 
-                testX = boundBox[x2, y2].X;
-                testY = boundBox[x2, y2].Y;
-
-                if (PlayField[testX, testY].ocupied)
+                if (orientation == "clock")
                 {
-                    canRotate = false; break;   
+                    Debug.WriteLine("Testing clock");
+                    clockx2 = ((boxSize - 1) - bricks[i].boxPosition.Y);
+                    clocky2 = (bricks[i].boxPosition.X);
+                }
+
+                else
+                {
+                    Debug.WriteLine("Testing counter");
+                    clockx2 = (bricks[i].boxPosition.Y);
+                    clocky2 = ((boxSize - 1) - bricks[i].boxPosition.X);
+                }
+               
+
+                clocktestX = boundBox[clockx2, clocky2].X;
+                clocktestY = boundBox[clockx2, clocky2].Y;
+
+                if (boundBox[0,0].X > 0 && boundBox[boxSize - 1, 0].X < Globals.WindowSize.X)
+                {
+                    if (PlayField[clocktestX, clocktestY].ocupied)
+                    {
+                        canRotate = false; break;
+                    }
                 }
             }
-
-            
-            if (canRotate)
-            {
-                for (int i = 0; i < bricks.Count; i++)
-                {
-                    x2 = (bricks[i].boxPosition.Y);
-                    y2 = ((boxSize - 1) - bricks[i].boxPosition.X);
-
-                    bricks[i].boxPosition.X = x2;
-                    bricks[i].boxPosition.Y = y2;
-                }
-
-                for (int i = 0; i < bricks.Count; i++)
-                {
-                    bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
-                    bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
-                }
-            }
+            return canRotate;
         }
 
         public static void ClockWiseRotate(List<Brick> bricks, Point[,] boundBox, int boxSize, Square[,] PlayField)
         {
-
             int x2;
             int y2;
-            bool canRotate = true;
-            int testX;
-            int testY;
 
             for (int i = 0; i < bricks.Count; i++)
             {
                 x2 = ((boxSize - 1) - bricks[i].boxPosition.Y);
                 y2 = (bricks[i].boxPosition.X);
 
-                testX = boundBox[x2, y2].X;
-                testY = boundBox[x2, y2].Y;
-
-                if (PlayField[testX, testY].ocupied)
-                {
-                    canRotate = false; break;
-                }
+                bricks[i].boxPosition.X = x2;
+                bricks[i].boxPosition.Y = y2;
             }
 
-
-            if (canRotate)
+            for (int i = 0; i < bricks.Count; i++)
             {
-                for (int i = 0; i < bricks.Count; i++)
-                {
-                    x2 = ((boxSize - 1) - bricks[i].boxPosition.Y);
-                    y2 = (bricks[i].boxPosition.X);
+                bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
+                bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
+            }
+        }
 
-                    bricks[i].boxPosition.X = x2;
-                    bricks[i].boxPosition.Y = y2;
-                }
 
-                for (int i = 0; i < bricks.Count; i++)
-                {
-                    bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
-                    bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
-                }
+        public static void CounterWiseRotate(List<Brick> bricks, Point[,] boundBox, int boxSize, Square[,] PlayField)
+        {
+            int x2;
+            int y2;
+       
+            for (int i = 0; i < bricks.Count; i++)
+            {
+                x2 = (bricks[i].boxPosition.Y);
+                y2 = ((boxSize - 1) - bricks[i].boxPosition.X);
+
+                bricks[i].boxPosition.X = x2;
+                bricks[i].boxPosition.Y = y2;
             }
 
-            //int x2;
-            //int y2;
-
-            //for (int i = 0; i < bricks.Count; i++)
-            //{              
-            //    x2 = ((boxSize - 1) - bricks[i].boxPosition.Y);
-            //    y2 = (bricks[i].boxPosition.X);
-
-            //    bricks[i].boxPosition.X = x2;
-            //    bricks[i].boxPosition.Y = y2;
-            //}
-
-            //for (int i = 0; i < bricks.Count; i++)
-            //{
-            //    bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
-            //    bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
-            //}
+            for (int i = 0; i < bricks.Count; i++)
+            {
+                bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
+                bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
+            }
         }
     }
 }
+
+
+
