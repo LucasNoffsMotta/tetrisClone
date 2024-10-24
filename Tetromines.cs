@@ -19,7 +19,7 @@ namespace Tetris
         private Random random;
         private int initialPos;
         private char bricktype;
-        private char[] brickTypes = new char[] { 'I', 'L', 'J', 'T' };
+        private char[] brickTypes = new char[] { 'I', 'L', 'J', 'T', 'O', 'S', 'Z' };
         public bool alive, canMoveLeft, canMoveRight, canMoveDown, timerCounting;
         public int _leftBound, _rightBound, _bottomBound, _topBound, boxSize;
         public float rotationTimer, rotationTimerLimit, fallSpeed, fallTrigger, fallCount, sideMoveTimer, sideMoveCount;
