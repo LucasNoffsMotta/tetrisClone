@@ -19,29 +19,14 @@ namespace Tetris
         private Random random;
         private int initialPos;
         private char bricktype;
-        private char[] brickTypes = new char[] { 'O', 'I', 'S', 'Z', 'L', 'J', 'T' };
-        public bool alive;
-        public int _leftBound;
-        public int _rightBound;
-        public int _bottomBound;
-        public int _topBound;
-        public bool canMoveLeft;
-        public bool canMoveRight;
-        public bool canMoveDown;
-        public float rotationTimer;
-        public bool timerCounting;
-        public float rotationTimerLimit;
+        private char[] brickTypes = new char[] { 'I', 'L', 'J', 'T' };
+        public bool alive, canMoveLeft, canMoveRight, canMoveDown, timerCounting;
+        public int _leftBound, _rightBound, _bottomBound, _topBound, boxSize;
+        public float rotationTimer, rotationTimerLimit, fallSpeed, fallTrigger, fallCount, sideMoveTimer, sideMoveCount;
         public Point[,] boundBox;
-        public int boxSize;
         public List<Point> shapePosOnBox;
-        public float fallSpeed;
-        public float fallTrigger;
-        public float fallCount;
-        private float sideMoveTimer;
-        private float sideMoveCount;
         private bool moveCounting;
-        bool rotateClock = true;
-        bool rotateCounter = true;
+        bool rotateClock = true, rotateCounter = true;
 
         public Tetromines()
         {
