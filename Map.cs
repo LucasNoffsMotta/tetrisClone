@@ -31,8 +31,9 @@ namespace Tetris
             {
                 for (int x = 0; x < Size.X; x++)
                 {
-                    PlayField[x, y] = new(Globals.Content.Load<Texture2D>("BackGroundTile"), MapToScreen(x, y));
-                }         
+                    PlayField[x, y] = new(Globals.Content.Load<Texture2D>("BackGroundTile2"), MapToScreen(x, y));
+
+                }
             }
         }
 
@@ -43,11 +44,9 @@ namespace Tetris
             {
                 for (int y = 0; y < Size.Y; y++)
                 {
-                    PlayField[x, y].Draw();
+                     PlayField[x, y].Draw();          
                 }
             }
         }
-
-
     }
 }

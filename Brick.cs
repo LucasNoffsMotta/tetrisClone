@@ -15,6 +15,7 @@ namespace Tetris
         public bool coliding;
         public (int x, int y) mapPos;
         public Point boxPosition;
+        public bool descended, canMoveDownFloor, canMoveDownRect;
 
 
 
@@ -22,49 +23,70 @@ namespace Tetris
         {
             this.Texture = Texture;
             this.Position = Position;
-            Rectangle.X = (int)Position.X * 32; Rectangle.Y = (int)Position.Y * 32;
+            Rectangle.X = (int)(Position.X * 32) + Globals.PlayFieldStartPos.X; Rectangle.Y = (int)(Position.Y * 32) + Globals.PlayFieldStartPos.Y;
             alive = true;
             coliding = false;
-            mapPos.x = Rectangle.X / 32;
-            mapPos.y = Rectangle.Y / 32;
-        } 
+            mapPos.x = (Rectangle.X - Globals.PlayFieldStartPos.X) / 32;
+            mapPos.y = (Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
+            descended = false;
+            canMoveDownFloor = true;
+            canMoveDownRect = true;
+        }
 
-        public void CheckFallColision(Square[,] PlayField )
+        public void CheckFallColision(Square[,] PlayField, float fallTrigger, float fallSpeed)
         {
-            if (Rectangle.Bottom >= Globals.WindowSize.Y) 
+            if (Rectangle.Bottom >= Globals.PlayFieldSize.Y + Globals.PlayFieldStartPos.Y)
+            {
+                {
+                    canMoveDownFloor = false;
+                }
+            }
+
+            if (Rectangle.Bottom < Globals.PlayFieldSize.Y + Globals.PlayFieldStartPos.Y)
+            {
+                canMoveDownFloor = true;
+            }
+        }
+
+        public void CheckStopCondition(float fallTrigger, float fallSpeed)
+        {
+            if (!canMoveDownFloor || !canMoveDownRect && fallTrigger >= fallSpeed)
             {
                 coliding = true;
                 alive = false;
-            }          
+            }
         }
 
-        public void CheckRectColision(Square[,] PlayField)
+        public void CheckRectColision(Square[,] PlayField, float fallTrigger, float fallSpeed)
 
         {
             if (Rectangle.Y > 32)
             {
-                if (PlayField[Rectangle.X / 32, Rectangle.Y / 32 + 1].ocupied)
-                {                
-                    coliding = true;
-                    alive = false;
+                if (PlayField[mapPos.x, mapPos.y + 1].ocupied)
+                {
+                    canMoveDownRect = false;
                 }
-            }           
+
+                else
+                {
+                    canMoveDownRect = true;
+                }
+            }
         }
 
 
-        public void Update(Square[,] PlayField, bool canMoveLeft, bool canMoveRight)
+        public void Update(Square[,] PlayField, bool canMoveLeft, bool canMoveRight, float fallTrigger, float fallSpeed)
         {
-            
-            CheckFallColision(PlayField);        
-            mapPos.x = Rectangle.X / 32;
-            mapPos.y = Rectangle.Y / 32;
-           
+            CheckFallColision(PlayField, fallTrigger, fallSpeed);
+            CheckRectColision(PlayField, fallTrigger, fallSpeed);
+            CheckStopCondition(fallTrigger, fallSpeed);
+            mapPos.x = (Rectangle.X - Globals.PlayFieldStartPos.X) / 32;
+            mapPos.y = (Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
+
         }
 
         public void Draw()
         {
-            //Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
-            
             Globals.SpriteBatch.Draw(Texture, Rectangle, Color.White);
         }
     }

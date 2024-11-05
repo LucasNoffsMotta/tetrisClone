@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/File.spritefont</SourceFile>
+  <SourceTime>2024-08-16T10:04:56-07:00</SourceTime>
+  <DestFile>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/File.xnb</DestFile>
+  <DestTime>2024-11-03T21:35:26.0408571-08:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2024-08-16T10:05:56-07:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2024-08-16T10:05:56-07:00</ProcessorTime>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

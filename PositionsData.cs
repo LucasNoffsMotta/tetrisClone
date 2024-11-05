@@ -1,14 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.MediaFoundation.DirectX;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
+
 
 namespace Tetris
 {
@@ -122,23 +117,20 @@ namespace Tetris
 
                 if (orientation == "clock")
                 {
-                    Debug.WriteLine("Testing clock");
                     clockx2 = ((boxSize - 1) - bricks[i].boxPosition.Y);
                     clocky2 = (bricks[i].boxPosition.X);
                 }
 
                 else
                 {
-                    Debug.WriteLine("Testing counter");
                     clockx2 = (bricks[i].boxPosition.Y);
                     clocky2 = ((boxSize - 1) - bricks[i].boxPosition.X);
                 }
-               
 
                 clocktestX = boundBox[clockx2, clocky2].X;
                 clocktestY = boundBox[clockx2, clocky2].Y;
 
-                if (boundBox[0,0].X > 0 && boundBox[boxSize - 1, 0].X < Globals.WindowSize.X)
+                if (boundBox[0, 0].X > Globals.PlayFieldStartPos.X && boundBox[boxSize - 1, 0].X < Globals.PlayFieldSize.X + Globals.PlayFieldStartPos.X)
                 {
                     if (PlayField[clocktestX, clocktestY].ocupied)
                     {
@@ -165,8 +157,8 @@ namespace Tetris
 
             for (int i = 0; i < bricks.Count; i++)
             {
-                bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
-                bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
+                bricks[i].Rectangle.X = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32) + Globals.PlayFieldStartPos.X;
+                bricks[i].Rectangle.Y = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32) + Globals.PlayFieldStartPos.Y;
             }
         }
 
@@ -175,7 +167,7 @@ namespace Tetris
         {
             int x2;
             int y2;
-       
+
             for (int i = 0; i < bricks.Count; i++)
             {
                 x2 = (bricks[i].boxPosition.Y);
@@ -187,12 +179,9 @@ namespace Tetris
 
             for (int i = 0; i < bricks.Count; i++)
             {
-                bricks[i].Rectangle.X = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32;
-                bricks[i].Rectangle.Y = boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32;
+                bricks[i].Rectangle.X = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32) + Globals.PlayFieldStartPos.X;
+                bricks[i].Rectangle.Y = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32) + Globals.PlayFieldStartPos.Y;
             }
         }
     }
 }
-
-
-
