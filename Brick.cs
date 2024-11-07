@@ -33,13 +33,13 @@ namespace Tetris
             canMoveDownRect = true;
         }
 
-        public void CheckFallColision(Square[,] PlayField, float fallTrigger, float fallSpeed)
+        public void CheckFallColision(Square[,] PlayField)
         {
             if (Rectangle.Bottom >= Globals.PlayFieldSize.Y + Globals.PlayFieldStartPos.Y)
             {
-                {
-                    canMoveDownFloor = false;
-                }
+                
+                 canMoveDownFloor = false;
+                
             }
 
             if (Rectangle.Bottom < Globals.PlayFieldSize.Y + Globals.PlayFieldStartPos.Y)
@@ -48,16 +48,7 @@ namespace Tetris
             }
         }
 
-        public void CheckStopCondition(float fallTrigger, float fallSpeed)
-        {
-            if (!canMoveDownFloor || !canMoveDownRect && fallTrigger >= fallSpeed)
-            {
-                coliding = true;
-                alive = false;
-            }
-        }
-
-        public void CheckRectColision(Square[,] PlayField, float fallTrigger, float fallSpeed)
+        public void CheckRectColision(Square[,] PlayField)
 
         {
             if (Rectangle.Y > 32)
@@ -75,10 +66,20 @@ namespace Tetris
         }
 
 
+        public void CheckStopCondition(float fallTrigger, float fallSpeed)
+        {
+            if (!canMoveDownFloor || !canMoveDownRect && fallTrigger >= fallSpeed)
+            {
+                coliding = true;
+                alive = false;
+            }
+        }
+
+
         public void Update(Square[,] PlayField, bool canMoveLeft, bool canMoveRight, float fallTrigger, float fallSpeed)
         {
-            CheckFallColision(PlayField, fallTrigger, fallSpeed);
-            CheckRectColision(PlayField, fallTrigger, fallSpeed);
+            CheckFallColision(PlayField);
+            CheckRectColision(PlayField);
             CheckStopCondition(fallTrigger, fallSpeed);
             mapPos.x = (Rectangle.X - Globals.PlayFieldStartPos.X) / 32;
             mapPos.y = (Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;

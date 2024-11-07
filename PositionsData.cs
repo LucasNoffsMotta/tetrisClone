@@ -105,20 +105,20 @@ namespace Tetris
         }
 
 
-        public static bool CheckRotationCoordinates(List<Brick> bricks, string orientation, bool canRotate, Point[,] boundBox, int boxSize, Square[,] PlayField)
+        public static bool CheckRotationCoordinates(List<Brick> bricks, string orientation, Point[,] boundBox, int boxSize, Square[,] PlayField)
         {
-            int clockx2 = 0;
-            int clocky2 = 0;
-            int clocktestX = 0;
-            int clocktestY = 0;
+            int clockx2;
+            int clocky2;
+            int clocktestX;
+            int clocktestY;
 
             for (int i = 0; i < bricks.Count; i++)
             {
 
                 if (orientation == "clock")
                 {
-                    clockx2 = ((boxSize - 1) - bricks[i].boxPosition.Y);
-                    clocky2 = (bricks[i].boxPosition.X);
+                    clockx2 = (boxSize - 1) - bricks[i].boxPosition.Y;
+                    clocky2 = bricks[i].boxPosition.X;
                 }
 
                 else
@@ -130,15 +130,15 @@ namespace Tetris
                 clocktestX = boundBox[clockx2, clocky2].X;
                 clocktestY = boundBox[clockx2, clocky2].Y;
 
-                if (boundBox[0, 0].X > Globals.PlayFieldStartPos.X && boundBox[boxSize - 1, 0].X < Globals.PlayFieldSize.X + Globals.PlayFieldStartPos.X)
+
+                if (PlayField[clocktestX, clocktestY].ocupied)
                 {
-                    if (PlayField[clocktestX, clocktestY].ocupied)
-                    {
-                        canRotate = false; break;
-                    }
+                    Debug.WriteLine("FALSE");
+                    return false;
                 }
-            }
-            return canRotate;
+
+            } 
+            return true;          
         }
 
         public static void ClockWiseRotate(List<Brick> bricks, Point[,] boundBox, int boxSize, Square[,] PlayField)
@@ -159,6 +159,8 @@ namespace Tetris
             {
                 bricks[i].Rectangle.X = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32) + Globals.PlayFieldStartPos.X;
                 bricks[i].Rectangle.Y = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32) + Globals.PlayFieldStartPos.Y;
+                bricks[i].mapPos.x = (bricks[i].Rectangle.X - Globals.PlayFieldStartPos.X) / 32;
+                bricks[i].mapPos.y = (bricks[i].Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
             }
         }
 
@@ -181,6 +183,8 @@ namespace Tetris
             {
                 bricks[i].Rectangle.X = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32) + Globals.PlayFieldStartPos.X;
                 bricks[i].Rectangle.Y = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32) + Globals.PlayFieldStartPos.Y;
+                bricks[i].mapPos.x = (bricks[i].Rectangle.X - Globals.PlayFieldStartPos.X) / 32;
+                bricks[i].mapPos.y = (bricks[i].Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
             }
         }
     }

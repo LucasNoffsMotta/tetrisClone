@@ -309,6 +309,7 @@ namespace Tetris
                             break;
                         }
 
+
                         else
                         {
                             canMoveRight = true;
@@ -328,24 +329,29 @@ namespace Tetris
         }
 
 
+
         public void Rotate(Square[,] PlayField)
         {
             if (bricktype != 'O')
             {
-                CheckRotationCondition(PlayField);
-
-                if (boundBox[boxSize - 1, 0].X < 10 && (boundBox[0, 0].X >= 0) && boundBox[0, boxSize - 1].Y < 20)
+                  
+                if (boundBox[boxSize - 1, 0].X < 10 && (boundBox[0, 0].X >= 0) && boundBox[0, boxSize - 1].Y < 20 && boundBox[0,0].Y >= 0)
                 {
+                    CheckRotationCondition(PlayField);
+                    Debug.WriteLine($"Clock: {rotateClock}");
+                    Debug.WriteLine($"Counter: {rotateCounter}");
                     if (InputManager.KeybordPressed.IsKeyDown(Keys.C) && !timerCounting && rotateClock)
                     {
-                        CreateObjects.ClockWiseRotate(bricks, boundBox, boxSize, PlayField);
-                        timerCounting = true;
+                        {
+                            CreateObjects.ClockWiseRotate(bricks, boundBox, boxSize, PlayField);
+                            timerCounting = true;
+                        }                                         
                     }
 
                     if (InputManager.KeybordPressed.IsKeyDown(Keys.Z) && !timerCounting && rotateCounter)
                     {
-                        CreateObjects.CounterWiseRotate(bricks, boundBox, boxSize, PlayField);
-                        timerCounting = true;
+                             CreateObjects.CounterWiseRotate(bricks, boundBox, boxSize, PlayField);
+                             timerCounting = true;                
                     }
                 }
             }
@@ -355,9 +361,8 @@ namespace Tetris
         public void CheckRotationCondition(Square[,] PlayField)
         {
 
-            rotateClock = CreateObjects.CheckRotationCoordinates(bricks, "clock", rotateClock, boundBox, boxSize, PlayField);
-            rotateCounter = CreateObjects.CheckRotationCoordinates(bricks, "counter", rotateCounter, boundBox, boxSize, PlayField);
-
+            rotateClock = CreateObjects.CheckRotationCoordinates(bricks, "clock", boundBox, boxSize, PlayField);
+            rotateCounter = CreateObjects.CheckRotationCoordinates(bricks, "counter", boundBox, boxSize, PlayField);
         }
 
 
@@ -366,22 +371,22 @@ namespace Tetris
             RotateTimerEngine();
             (_leftBound, _rightBound) = GetBounds();
             Respawn(PlayField);
+
+
             CheckIfCanMove(PlayField);
+            CheckIfCanMoveDown();
+            Debug.WriteLine(canMoveDown);
+            CheckFallColision(PlayField, Size);
             Fall();
+            Rotate(PlayField);
             MoveTimerSides();
             MoveSides(PlayField, canMoveLeft, canMoveRight);
-            Rotate(PlayField);
-            rotateClock = true;
-            rotateCounter = true;
-
             for (int i = 0; i < bricks.Count; i++)
             {
                 bricks[i].Update(PlayField, canMoveLeft, canMoveRight, fallTrigger, fallSpeed);
             }
-
-            CheckIfCanMoveDown();
-            Debug.WriteLine(canMoveDown);
-            CheckFallColision(PlayField, Size);
+         
+       
         }
     }
 }
