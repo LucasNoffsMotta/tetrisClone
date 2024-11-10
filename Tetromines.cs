@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 
+
 namespace Tetris
 {
     public class Tetromines
@@ -143,8 +144,9 @@ namespace Tetris
             }
         }
 
-        public void Fall()
+        public void Fall(Square[,] PlayField, Point Size)
         {
+            CheckFallColision(PlayField, Size);
             MoveDown();
             DropScore();
 
@@ -167,7 +169,7 @@ namespace Tetris
             if (sideMoveCount >= sideMoveTimer) { sideMoveCount = 0; moveCounting = false; }
         }
 
-        public void MoveSides(Square[,] PlayField, bool canMoveLeft, bool canMoveRight)
+        public void MoveSides(Square[,] PlayField, Point Size,  bool canMoveLeft, bool canMoveRight)
         {
             if (InputManager.KeybordPressed.IsKeyDown(Keys.Left) && !moveCounting && fallCount != 0.5f)
             {
@@ -186,6 +188,7 @@ namespace Tetris
                         }
                     }
                     moveCounting = true;
+                    Debug.WriteLine("MOVED LEFT");
                 }
             }
 
@@ -195,7 +198,7 @@ namespace Tetris
                 {
                     for (int i = 0; i < bricks.Count; i++)
                     {
-                        bricks[i].Rectangle.X += 32;
+                        bricks[i].Rectangle.X += 32;                        
                     }
 
                     for (int i = 0; i < boxSize; i++)
@@ -205,7 +208,7 @@ namespace Tetris
                             boundBox[i, j].X++;
                         }
                     }
-
+                    Debug.WriteLine("MOVED RIGHT");
                     moveCounting = true;
                 }
             }
@@ -277,21 +280,27 @@ namespace Tetris
                         boundBox[i, k].Y += 1;
                     }
                 }
+                CheckIfCanMove(PlayField);
                 canRespawn = false;
             }
         }
 
         public void CheckIfCanMove(Square[,] PlayField)
         {
+            Debug.WriteLine($"PLayField analysed Position X left : {((_leftBound - Globals.PlayFieldStartPos.X) / 32) - 1}");
+            Debug.WriteLine($"PLayField analysed Position X right: {((_rightBound - Globals.PlayFieldStartPos.X) / 32)}");
+        
+
             for (int i = 0; i < bricks.Count; i++)
             {
                 if (bricks[i].mapPos.y > Globals.PlayFieldStartPos.Y / 32)
                 {
                     if (_leftBound > Globals.PlayFieldStartPos.X)
                     {
-                        if (PlayField[(_leftBound - Globals.PlayFieldStartPos.X) / 32 - 1, bricks[i].Rectangle.Y / 32].ocupied == true)
+                        if (PlayField[((_leftBound - Globals.PlayFieldStartPos.X) / 32) - 1, bricks[i].Rectangle.Y / 32].ocupied == true)
                         {
                             canMoveLeft = false;
+                            Debug.WriteLine("Cant move left");
                             break;
                         }
 
@@ -303,9 +312,10 @@ namespace Tetris
 
                     if (_rightBound < Globals.PlayFieldSize.X + Globals.PlayFieldStartPos.X)
                     {
-                        if (PlayField[(_rightBound - Globals.PlayFieldStartPos.X) / 32, bricks[i].Rectangle.Y / 32].ocupied == true)
+                        if (PlayField[((_rightBound - Globals.PlayFieldStartPos.X) / 32), bricks[i].Rectangle.Y / 32].ocupied == true)
                         {
                             canMoveRight = false;
+                            Debug.WriteLine("Cant move right");
                             break;
                         }
 
@@ -315,6 +325,7 @@ namespace Tetris
                             canMoveRight = true;
                         }
                     }
+             
 
                     if (_leftBound == Globals.PlayFieldStartPos.X) { canMoveLeft = false; }
                     if (_rightBound == Globals.PlayFieldSize.X + Globals.PlayFieldStartPos.X) { canMoveRight = false; }
@@ -330,7 +341,7 @@ namespace Tetris
 
 
 
-        public void Rotate(Square[,] PlayField)
+        public void Rotate(Square[,] PlayField, Point Size)
         {
             if (bricktype != 'O')
             {
@@ -338,8 +349,7 @@ namespace Tetris
                 if (boundBox[boxSize - 1, 0].X < 10 && (boundBox[0, 0].X >= 0) && boundBox[0, boxSize - 1].Y < 20 && boundBox[0,0].Y >= 0)
                 {
                     CheckRotationCondition(PlayField);
-                    Debug.WriteLine($"Clock: {rotateClock}");
-                    Debug.WriteLine($"Counter: {rotateCounter}");
+
                     if (InputManager.KeybordPressed.IsKeyDown(Keys.C) && !timerCounting && rotateClock)
                     {
                         {
@@ -350,8 +360,8 @@ namespace Tetris
 
                     if (InputManager.KeybordPressed.IsKeyDown(Keys.Z) && !timerCounting && rotateCounter)
                     {
-                             CreateObjects.CounterWiseRotate(bricks, boundBox, boxSize, PlayField);
-                             timerCounting = true;                
+                             CreateObjects.CounterWiseRotate(bricks, boundBox, boxSize, PlayField);                             
+                             timerCounting = true; 
                     }
                 }
             }
@@ -368,25 +378,29 @@ namespace Tetris
 
         public void Update(Square[,] PlayField, Point Size)
         {
-            RotateTimerEngine();
-            (_leftBound, _rightBound) = GetBounds();
             Respawn(PlayField);
-
-
-            CheckIfCanMove(PlayField);
-            CheckIfCanMoveDown();
-            Debug.WriteLine(canMoveDown);
-            CheckFallColision(PlayField, Size);
-            Fall();
-            Rotate(PlayField);
+            RotateTimerEngine();
+            Rotate(PlayField, Size);
             MoveTimerSides();
-            MoveSides(PlayField, canMoveLeft, canMoveRight);
+            CheckIfCanMove(PlayField);
+            MoveSides(PlayField, Size, canMoveLeft, canMoveRight);
+            (_leftBound, _rightBound) = GetBounds();
+            CheckIfCanMoveDown();
+            Fall(PlayField, Size);
+
+
+            //CHECK FUNCTIONS
+
+            Debug.WriteLine($"Leftbound pos: {(_leftBound - Globals.PlayFieldStartPos.X) / 32}, Rightbound pos: {(_rightBound - Globals.PlayFieldStartPos.X) / 32}");
+
             for (int i = 0; i < bricks.Count; i++)
             {
                 bricks[i].Update(PlayField, canMoveLeft, canMoveRight, fallTrigger, fallSpeed);
             }
-         
-       
+
+            CheckFallColision(PlayField, Size);
+
+
         }
     }
 }

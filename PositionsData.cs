@@ -113,6 +113,7 @@ namespace Tetris
             int clocktestY;
 
             for (int i = 0; i < bricks.Count; i++)
+
             {
 
                 if (orientation == "clock")
@@ -133,7 +134,6 @@ namespace Tetris
 
                 if (PlayField[clocktestX, clocktestY].ocupied)
                 {
-                    Debug.WriteLine("FALSE");
                     return false;
                 }
 

@@ -5,7 +5,6 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-
 namespace Tetris
 {
     public class BricksManager
@@ -16,8 +15,8 @@ namespace Tetris
         private Random random;
         private Tetromines currentBrick;
         private int brickIndex;
-        private char[] brickTypes = new char[] { 'I' };
-        //private char[] brickTypes = new char[] { 'I', 'L', 'J', 'T', 'O', 'S', 'Z' };
+        //private char[] brickTypes = new char[] { 'Z' };
+        private char[] brickTypes = new char[] { 'I', 'L', 'J', 'T', 'O', 'S', 'Z' };
         private char bricktype;
         private char nextBrick;
 

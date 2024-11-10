@@ -36,10 +36,8 @@ namespace Tetris
         public void CheckFallColision(Square[,] PlayField)
         {
             if (Rectangle.Bottom >= Globals.PlayFieldSize.Y + Globals.PlayFieldStartPos.Y)
-            {
-                
-                 canMoveDownFloor = false;
-                
+            {                
+                 canMoveDownFloor = false;                
             }
 
             if (Rectangle.Bottom < Globals.PlayFieldSize.Y + Globals.PlayFieldStartPos.Y)
