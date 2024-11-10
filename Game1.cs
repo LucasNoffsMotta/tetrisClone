@@ -29,6 +29,7 @@ namespace Tetris
             _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
             _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
             _graphics.ApplyChanges();
+
             // TODO: Add your initialization logic here
             Globals.Content = Content;
             _gameManager = new GameManager();

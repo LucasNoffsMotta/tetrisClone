@@ -22,7 +22,6 @@ namespace Tetris
         private bool moveCounting, softDropScoring;
         bool rotateClock = true, rotateCounter = true;
 
-
         public Tetromines(char _bricktype, bool display = false)
 
         {
@@ -289,7 +288,9 @@ namespace Tetris
         {
             Debug.WriteLine($"PLayField analysed Position X left : {((_leftBound - Globals.PlayFieldStartPos.X) / 32) - 1}");
             Debug.WriteLine($"PLayField analysed Position X right: {((_rightBound - Globals.PlayFieldStartPos.X) / 32)}");
-        
+
+
+
 
             for (int i = 0; i < bricks.Count; i++)
             {
@@ -297,7 +298,7 @@ namespace Tetris
                 {
                     if (_leftBound > Globals.PlayFieldStartPos.X)
                     {
-                        if (PlayField[((_leftBound - Globals.PlayFieldStartPos.X) / 32) - 1, bricks[i].Rectangle.Y / 32].ocupied == true)
+                        if (PlayField[((_leftBound - Globals.PlayFieldStartPos.X) / 32) - 1, (bricks[i].Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32].ocupied == true)
                         {
                             canMoveLeft = false;
                             Debug.WriteLine("Cant move left");
@@ -310,9 +311,9 @@ namespace Tetris
                         }
                     }
 
-                    if (_rightBound < Globals.PlayFieldSize.X + Globals.PlayFieldStartPos.X)
+                    if (_rightBound <= Globals.PlayFieldSize.X + Globals.PlayFieldStartPos.X)
                     {
-                        if (PlayField[((_rightBound - Globals.PlayFieldStartPos.X) / 32), bricks[i].Rectangle.Y / 32].ocupied == true)
+                        if (PlayField[((_rightBound - Globals.PlayFieldStartPos.X) / 32), (bricks[i].Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32].ocupied == true)
                         {
                             canMoveRight = false;
                             Debug.WriteLine("Cant move right");
@@ -327,8 +328,8 @@ namespace Tetris
                     }
              
 
-                    if (_leftBound == Globals.PlayFieldStartPos.X) { canMoveLeft = false; }
-                    if (_rightBound == Globals.PlayFieldSize.X + Globals.PlayFieldStartPos.X) { canMoveRight = false; }
+                    if (_leftBound <= Globals.PlayFieldStartPos.X) { canMoveLeft = false; }
+                    if (_rightBound >= Globals.PlayFieldSize.X + Globals.PlayFieldStartPos.X) { canMoveRight = false; }
                 }
             }
         }
@@ -392,6 +393,7 @@ namespace Tetris
             //CHECK FUNCTIONS
 
             Debug.WriteLine($"Leftbound pos: {(_leftBound - Globals.PlayFieldStartPos.X) / 32}, Rightbound pos: {(_rightBound - Globals.PlayFieldStartPos.X) / 32}");
+            Debug.WriteLine($"Original rightbound: {_rightBound}");
 
             for (int i = 0; i < bricks.Count; i++)
             {

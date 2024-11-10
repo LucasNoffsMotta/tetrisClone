@@ -42,6 +42,5 @@ namespace Tetris
             Globals.SpriteBatch.DrawString(font, Globals.LinesCleaned.ToString(), new(220, 530), Color.White);
             Globals.SpriteBatch.End();
         }
-
     }
 }
