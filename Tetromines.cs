@@ -89,13 +89,13 @@ namespace Tetris
 
         public (int _leftBound, int _rightBound) GetBounds()
         {
-            _leftBound = bricks[0].Rectangle.X;
-            _rightBound = bricks[0].Rectangle.Right;
+            _leftBound = bricks[0].mapPos.x;
+            _rightBound = bricks[0].mapPos.x + 1;
 
             for (int i = 0; i < bricks.Count; i++)
             {
-                if (bricks[i].Rectangle.X < _leftBound) { _leftBound = bricks[i].Rectangle.X; }
-                if (bricks[i].Rectangle.Right > _rightBound) { _rightBound = bricks[i].Rectangle.Right; }
+                if (bricks[i].mapPos.x < _leftBound) { _leftBound = bricks[i].mapPos.x; }
+                if (bricks[i].mapPos.x + 1 > _rightBound) { _rightBound = bricks[i].mapPos.x + 1; }
             }
 
             return (_leftBound, _rightBound);
@@ -168,15 +168,18 @@ namespace Tetris
             if (sideMoveCount >= sideMoveTimer) { sideMoveCount = 0; moveCounting = false; }
         }
 
-        public void MoveSides(Square[,] PlayField, Point Size,  bool canMoveLeft, bool canMoveRight)
+        public void MoveSides(Square[,] PlayField, Point Size)
         {
+            
             if (InputManager.KeybordPressed.IsKeyDown(Keys.Left) && !moveCounting && fallCount != 0.5f)
             {
+                CheckIfCanMove(PlayField);
                 if (canMoveLeft)
                 {
                     for (int i = 0; i < bricks.Count; i++)
                     {
                         bricks[i].Rectangle.X -= 32;
+                        bricks[i].UpdateMapPos();
                     }
 
                     for (int i = 0; i < boxSize; i++)
@@ -193,11 +196,13 @@ namespace Tetris
 
             else if (InputManager.KeybordPressed.IsKeyDown(Keys.Right) && !moveCounting && fallCount != 0.5f)
             {
+                CheckIfCanMove(PlayField);
                 if (canMoveRight)
                 {
                     for (int i = 0; i < bricks.Count; i++)
                     {
-                        bricks[i].Rectangle.X += 32;                        
+                        bricks[i].Rectangle.X += 32;
+                        bricks[i].UpdateMapPos();
                     }
 
                     for (int i = 0; i < boxSize; i++)
@@ -211,6 +216,7 @@ namespace Tetris
                     moveCounting = true;
                 }
             }
+            (_leftBound, _rightBound) = GetBounds();
         }
 
         public void SumDropScore()
@@ -279,57 +285,53 @@ namespace Tetris
                         boundBox[i, k].Y += 1;
                     }
                 }
-                CheckIfCanMove(PlayField);
                 canRespawn = false;
             }
         }
 
         public void CheckIfCanMove(Square[,] PlayField)
         {
-            Debug.WriteLine($"PLayField analysed Position X left : {((_leftBound - Globals.PlayFieldStartPos.X) / 32) - 1}");
-            Debug.WriteLine($"PLayField analysed Position X right: {((_rightBound - Globals.PlayFieldStartPos.X) / 32)}");
-
-
+            Debug.WriteLine($"PLayField analysed Position X left : {_leftBound - 1}");
+            Debug.WriteLine($"PLayField analysed Position X right: {_rightBound}");
 
 
             for (int i = 0; i < bricks.Count; i++)
             {
                 if (bricks[i].mapPos.y > Globals.PlayFieldStartPos.Y / 32)
                 {
-                    if (_leftBound > Globals.PlayFieldStartPos.X)
+                    if (_leftBound > 0)
                     {
-                        if (PlayField[((_leftBound - Globals.PlayFieldStartPos.X) / 32) - 1, (bricks[i].Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32].ocupied == true)
+                        if (PlayField[_leftBound - 1, bricks[i].mapPos.y].ocupied == true && _leftBound == bricks[i].mapPos.x)
                         {
                             canMoveLeft = false;
                             Debug.WriteLine("Cant move left");
                             break;
                         }
 
-                        else
+                        else if (PlayField[_leftBound - 1, bricks[i].mapPos.y].ocupied == false && _leftBound == bricks[i].mapPos.x)
                         {
                             canMoveLeft = true;
                         }
                     }
 
-                    if (_rightBound <= Globals.PlayFieldSize.X + Globals.PlayFieldStartPos.X)
+                    if (_rightBound <= 10)
                     {
-                        if (PlayField[((_rightBound - Globals.PlayFieldStartPos.X) / 32), (bricks[i].Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32].ocupied == true)
+                        if (PlayField[_rightBound, bricks[i].mapPos.y].ocupied == true && _rightBound == bricks[i].mapPos.x + 1)
                         {
                             canMoveRight = false;
                             Debug.WriteLine("Cant move right");
                             break;
                         }
 
-
-                        else
+                        else if (PlayField[_rightBound, bricks[i].mapPos.y].ocupied == false && _rightBound == bricks[i].mapPos.x + 1)
                         {
                             canMoveRight = true;
                         }
                     }
              
 
-                    if (_leftBound <= Globals.PlayFieldStartPos.X) { canMoveLeft = false; }
-                    if (_rightBound >= Globals.PlayFieldSize.X + Globals.PlayFieldStartPos.X) { canMoveRight = false; }
+                    if (_leftBound <= 0) { canMoveLeft = false; }
+                    if (_rightBound >= 10) { canMoveRight = false; }
                 }
             }
         }
@@ -383,16 +385,15 @@ namespace Tetris
             RotateTimerEngine();
             Rotate(PlayField, Size);
             MoveTimerSides();
-            CheckIfCanMove(PlayField);
-            MoveSides(PlayField, Size, canMoveLeft, canMoveRight);
-            (_leftBound, _rightBound) = GetBounds();
+            MoveSides(PlayField, Size);
+            //(_leftBound, _rightBound) = GetBounds();
             CheckIfCanMoveDown();
             Fall(PlayField, Size);
 
 
             //CHECK FUNCTIONS
 
-            Debug.WriteLine($"Leftbound pos: {(_leftBound - Globals.PlayFieldStartPos.X) / 32}, Rightbound pos: {(_rightBound - Globals.PlayFieldStartPos.X) / 32}");
+            Debug.WriteLine($"Leftbound pos: {_leftBound}, Rightbound pos: {_rightBound}");
             Debug.WriteLine($"Original rightbound: {_rightBound}");
 
             for (int i = 0; i < bricks.Count; i++)

@@ -73,15 +73,19 @@ namespace Tetris
             }
         }
 
+        public void UpdateMapPos()
+        {
+            mapPos.x = (Rectangle.X - Globals.PlayFieldStartPos.X) / 32;
+            mapPos.y = (Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
+        }
+
 
         public void Update(Square[,] PlayField, bool canMoveLeft, bool canMoveRight, float fallTrigger, float fallSpeed)
         {
             CheckFallColision(PlayField);
             CheckRectColision(PlayField);
-            CheckStopCondition(fallTrigger, fallSpeed);
-            mapPos.x = (Rectangle.X - Globals.PlayFieldStartPos.X) / 32;
-            mapPos.y = (Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
-
+            CheckStopCondition(fallTrigger, fallSpeed);          
+            UpdateMapPos();
         }
 
         public void Draw()
