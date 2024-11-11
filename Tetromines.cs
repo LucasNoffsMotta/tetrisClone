@@ -194,9 +194,7 @@ namespace Tetris
                     }
                     freePiecesLeft = 0;
                     freePiecesRight = 0;
-                    moveCounting = true;
-                   
-                    Debug.WriteLine("MOVED LEFT");
+                    moveCounting = true;                 
                 }
             }
 
@@ -217,7 +215,6 @@ namespace Tetris
                             boundBox[i, j].X++;
                         }
                     }
-                    Debug.WriteLine("MOVED RIGHT");
                     freePiecesLeft = 0;
                     freePiecesRight = 0;
                     moveCounting = true;                
@@ -284,7 +281,7 @@ namespace Tetris
             {
                 for (int i = 0; i < bricks.Count; i++)
                 {
-                    bricks[i].Rectangle.Y += 128;              
+                    bricks[i].Rectangle.Y += 96;              
                     bricks[i].UpdateMapPos();
                 }
 
@@ -292,7 +289,7 @@ namespace Tetris
                 {
                     for (int k = 0; k < boxSize; k++)
                     {
-                        boundBox[i, k].Y += 4;
+                        boundBox[i, k].Y += 3;
                     }
                 }
                 pieceOnField = true;
@@ -300,15 +297,6 @@ namespace Tetris
              
             }
         }
-
-        //public void UpdateMoveBooleans()
-        //{
-        //    if (freePiecesLeft == totalPieces) { canMoveLeft = true; }
-        //    if (freePiecesRight == totalPieces) { canMoveRight = true; }
-
-        //    if (freePiecesLeft < totalPieces) { canMoveLeft = false; }
-        //    if (freePiecesRight < totalPieces) { canMoveRight = false; }
-        //}
 
         public void CheckIfCanMove(Square[,] PlayField)
         {
@@ -347,102 +335,6 @@ namespace Tetris
 
             if (_leftBound <= 0) { canMoveLeft = false; }
             if (_rightBound >= 10) { canMoveRight = false; }
-
-
-            //(_leftBound, _rightBound) = GetBounds();
-            //Debug.WriteLine(pieceOnField);
-
-            //if (pieceOnField && _leftBound >= 0)
-            //{
-            //    //Get the sum of free pices to the left
-
-            //    for (int i = 0; i < bricks.Count; i++)
-            //    {
-            //        if (bricks[i].mapPos.x > 0)
-            //        {
-            //            if (!PlayField[bricks[i].mapPos.x - 1, bricks[i].mapPos.y].ocupied)
-            //            {
-            //                freePiecesLeft++;
-            //                if (freePiecesLeft >= totalPieces) { freePiecesLeft = totalPieces; }
-            //            }
-
-            //            else if (PlayField[bricks[i].mapPos.x - 1, bricks[i].mapPos.y].ocupied)
-            //            {
-            //                freePiecesLeft--;
-            //                if (freePiecesLeft <= 0) { freePiecesLeft = 0; }
-            //            }
-            //        }
-            //    }
-
-
-            //    //Get the sum of free pices to the right
-
-            //    for (int i = 0; i < bricks.Count; i++)
-            //    {
-            //        if (!PlayField[bricks[i].mapPos.x + 1, bricks[i].mapPos.y].ocupied)
-            //        {
-            //            freePiecesRight++;
-            //            if (freePiecesRight >= totalPieces) { freePiecesRight = totalPieces; }
-            //        }
-
-            //        else if (PlayField[bricks[i].mapPos.x + 1, bricks[i].mapPos.y].ocupied)
-            //        {
-            //            freePiecesRight--;
-            //            if (freePiecesRight <= 0) { freePiecesRight = 0; }
-            //        }
-            //    }
-
-            //}
-
-            //if (_leftBound <= 0) { freePiecesLeft = 0; }
-            //if (_rightBound >= 10) { freePiecesRight = 0; }
-
-            //UpdateMoveBooleans();
-
-            //Debug.WriteLine($" Total Pieces: {totalPieces}");
-            //Debug.WriteLine($"Total can move left: {freePiecesLeft}");
-            //Debug.WriteLine($"Total can move right: {freePiecesRight}");
-
-
-            //for (int i = 0; i < bricks.Count; i++)
-            //{
-            //    if (bricks[i].mapPos.y > Globals.PlayFieldStartPos.Y / 32)
-            //    {
-            //        if (_leftBound > 0)
-            //        {
-            //            if (PlayField[_leftBound - 1, bricks[i].mapPos.y].ocupied == true && _leftBound == bricks[i].mapPos.x)
-            //            {
-            //                canMoveLeft = false;
-            //                Debug.WriteLine("Cant move left");
-            //                break;
-            //            }
-
-            //            else if (PlayField[_leftBound - 1, bricks[i].mapPos.y].ocupied == false && _leftBound == bricks[i].mapPos.x)
-            //            {
-            //                canMoveLeft = true;
-            //            }
-            //        }
-
-            //        if (_rightBound <= 10)
-            //        {
-            //            if (PlayField[_rightBound, bricks[i].mapPos.y].ocupied == true && _rightBound == bricks[i].mapPos.x + 1)
-            //            {
-            //                canMoveRight = false;
-            //                Debug.WriteLine("Cant move right");
-            //                break;
-            //            }
-
-            //            else if (PlayField[_rightBound, bricks[i].mapPos.y].ocupied == false && _rightBound == bricks[i].mapPos.x + 1)
-            //            {
-            //                canMoveRight = true;
-            //            }
-            //        }
-
-
-            //        if (_leftBound <= 0) { canMoveLeft = false; }
-            //        if (_rightBound >= 10) { canMoveRight = false; }
-            //    }
-            //}
         }
 
 
@@ -496,21 +388,15 @@ namespace Tetris
             Rotate(PlayField, Size);
             MoveTimerSides();
             MoveSides(PlayField, Size);
-    
-            //(_leftBound, _rightBound) = GetBounds();
             CheckIfCanMoveDown();
             Fall(PlayField, Size);
-
-
-            //CHECK FUNCTIONS
 
             for (int i = 0; i < bricks.Count; i++)
             {
                 bricks[i].Update(PlayField, canMoveLeft, canMoveRight, fallTrigger, fallSpeed);
             }
 
-            CheckFallColision(PlayField, Size);
-          
+            CheckFallColision(PlayField, Size);         
         }
     }
 }
