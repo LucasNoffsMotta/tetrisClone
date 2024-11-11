@@ -192,9 +192,10 @@ namespace Tetris
                             boundBox[i, j].X--;
                         }
                     }
-                    moveCounting = true;
                     freePiecesLeft = 0;
                     freePiecesRight = 0;
+                    moveCounting = true;
+                   
                     Debug.WriteLine("MOVED LEFT");
                 }
             }
@@ -217,9 +218,9 @@ namespace Tetris
                         }
                     }
                     Debug.WriteLine("MOVED RIGHT");
-                    moveCounting = true;
                     freePiecesLeft = 0;
                     freePiecesRight = 0;
+                    moveCounting = true;                
                 }
                
             }
@@ -235,6 +236,7 @@ namespace Tetris
         {
             for (int i = 0; i < bricks.Count; i++)
             {
+                bricks[i].UpdateMapPos();
                 bricks[i].alive = false;
             }
         }
@@ -290,13 +292,22 @@ namespace Tetris
                 {
                     for (int k = 0; k < boxSize; k++)
                     {
-                        boundBox[i, k].Y += 1;
+                        boundBox[i, k].Y += 4;
                     }
                 }
                 pieceOnField = true;
                 canRespawn = false;
              
             }
+        }
+
+        public void UpdateMoveBooleans()
+        {
+            if (freePiecesLeft == totalPieces) { canMoveLeft = true; }
+            if (freePiecesRight == totalPieces) { canMoveRight = true; }
+
+            if (freePiecesLeft < totalPieces) { canMoveLeft = false; }
+            if (freePiecesRight < totalPieces) { canMoveRight = false; }
         }
 
         public void CheckIfCanMove(Square[,] PlayField)
@@ -306,7 +317,7 @@ namespace Tetris
             Debug.WriteLine($"Right bound: {_rightBound}");
             //Debug.WriteLine(pieceOnField);
 
-            if (pieceOnField && _leftBound >= 0 && _rightBound < 10)
+            if (pieceOnField && _leftBound >= 0)
             {
                 //Get the sum of free pices to the left
 
@@ -318,6 +329,12 @@ namespace Tetris
                         {
                             freePiecesLeft++;
                             if (freePiecesLeft >= totalPieces) { freePiecesLeft = totalPieces; }
+                        }
+
+                        else if (PlayField[bricks[i].mapPos.x - 1, bricks[i].mapPos.y].ocupied)
+                        {
+                            freePiecesLeft--;
+                            if (freePiecesLeft <= 0) { freePiecesLeft = 0; }
                         }
                     }
                 }
@@ -332,18 +349,20 @@ namespace Tetris
                         freePiecesRight++;
                         if (freePiecesRight >= totalPieces) { freePiecesRight = totalPieces; }
                     }
+
+                    else if (PlayField[bricks[i].mapPos.x + 1, bricks[i].mapPos.y].ocupied)
+                    {
+                        freePiecesRight--;
+                        if (freePiecesRight <= 0) { freePiecesRight = 0; }
+                    }
                 }
 
             }
 
-            else if (_leftBound <= 0) { freePiecesLeft = 0; }
-            else if (_rightBound >= 10) { freePiecesRight = 0; }
+            if (_leftBound <= 0) { freePiecesLeft = 0; }
+            if (_rightBound >= 10) { freePiecesRight = 0; }
 
-
-            if (freePiecesLeft == totalPieces) { canMoveLeft = true; }
-            if (freePiecesRight == totalPieces) { canMoveRight = true; }
-            else if (freePiecesLeft != totalPieces) { canMoveLeft = false; }
-            else if (freePiecesRight != totalPieces) { canMoveRight = false; }
+            UpdateMoveBooleans();
 
             Debug.WriteLine($" Total Pieces: {totalPieces}");
             Debug.WriteLine($"Total can move left: {freePiecesLeft}");
@@ -387,6 +406,8 @@ namespace Tetris
 
             //        if (_leftBound <= 0) { canMoveLeft = false; }
             //        if (_rightBound >= 10) { canMoveRight = false; }
+            //    }
+            //}
         }
 
 
@@ -447,7 +468,6 @@ namespace Tetris
 
 
             //CHECK FUNCTIONS
-
 
             for (int i = 0; i < bricks.Count; i++)
             {

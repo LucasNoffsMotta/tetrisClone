@@ -159,8 +159,7 @@ namespace Tetris
             {
                 bricks[i].Rectangle.X = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32) + Globals.PlayFieldStartPos.X;
                 bricks[i].Rectangle.Y = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32) + Globals.PlayFieldStartPos.Y;
-                bricks[i].mapPos.x = (bricks[i].Rectangle.X - Globals.PlayFieldStartPos.X) / 32;
-                bricks[i].mapPos.y = (bricks[i].Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
+                bricks[i].UpdateMapPos();
             }
         }
 
@@ -183,8 +182,7 @@ namespace Tetris
             {
                 bricks[i].Rectangle.X = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].X * 32) + Globals.PlayFieldStartPos.X;
                 bricks[i].Rectangle.Y = (boundBox[bricks[i].boxPosition.X, bricks[i].boxPosition.Y].Y * 32) + Globals.PlayFieldStartPos.Y;
-                bricks[i].mapPos.x = (bricks[i].Rectangle.X - Globals.PlayFieldStartPos.X) / 32;
-                bricks[i].mapPos.y = (bricks[i].Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
+                bricks[i].UpdateMapPos();
             }
         }
     }
