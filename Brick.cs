@@ -15,7 +15,7 @@ namespace Tetris
         public bool coliding;
         public (int x, int y) mapPos;
         public Point boxPosition;
-        public bool descended, canMoveDownFloor, canMoveDownRect;
+        public bool descended, canMoveDownFloor, canMoveDownRect, canMoveLeft, canMoveRight;
 
 
 
@@ -31,6 +31,34 @@ namespace Tetris
             descended = false;
             canMoveDownFloor = true;
             canMoveDownRect = true;
+            canMoveLeft = true;
+            canMoveRight = true;
+        }
+
+        public void CheckIfCanMoveRight(Square[,] PlayField)
+        {
+            if (!PlayField[mapPos.x + 1, mapPos.y].ocupied)
+            {
+                canMoveRight = true;
+            }
+
+            else
+            {
+                canMoveRight = false;
+            }
+        }
+
+        public void CheckIfCanMoveLeft(Square[,] PlayField)
+        {
+            if (!PlayField[mapPos.x - 1, mapPos.y].ocupied)
+            {
+                canMoveLeft = true;
+            }
+
+            else
+            {
+                canMoveLeft = false;
+            }
         }
 
         public void CheckFallColision(Square[,] PlayField)
@@ -79,12 +107,22 @@ namespace Tetris
             mapPos.y = (Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
         }
 
+        public void CheckMoveSides(Square[,] PlayField)
+        {
+            if (mapPos.y >= 0 && mapPos.x > 0 && mapPos.x <= 10)
+            {
+                CheckIfCanMoveLeft(PlayField);
+                CheckIfCanMoveRight(PlayField);
+            }
+        }
+
 
         public void Update(Square[,] PlayField, bool canMoveLeft, bool canMoveRight, float fallTrigger, float fallSpeed)
         {
             CheckFallColision(PlayField);
             CheckRectColision(PlayField);
-            CheckStopCondition(fallTrigger, fallSpeed);          
+            CheckStopCondition(fallTrigger, fallSpeed);
+            CheckMoveSides(PlayField);
             UpdateMapPos();
         }
 

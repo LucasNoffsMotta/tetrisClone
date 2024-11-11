@@ -301,72 +301,111 @@ namespace Tetris
             }
         }
 
-        public void UpdateMoveBooleans()
-        {
-            if (freePiecesLeft == totalPieces) { canMoveLeft = true; }
-            if (freePiecesRight == totalPieces) { canMoveRight = true; }
+        //public void UpdateMoveBooleans()
+        //{
+        //    if (freePiecesLeft == totalPieces) { canMoveLeft = true; }
+        //    if (freePiecesRight == totalPieces) { canMoveRight = true; }
 
-            if (freePiecesLeft < totalPieces) { canMoveLeft = false; }
-            if (freePiecesRight < totalPieces) { canMoveRight = false; }
-        }
+        //    if (freePiecesLeft < totalPieces) { canMoveLeft = false; }
+        //    if (freePiecesRight < totalPieces) { canMoveRight = false; }
+        //}
 
         public void CheckIfCanMove(Square[,] PlayField)
         {
-            (_leftBound, _rightBound) = GetBounds();
-            Debug.WriteLine($"Left bound: {_leftBound}");
-            Debug.WriteLine($"Right bound: {_rightBound}");
-            //Debug.WriteLine(pieceOnField);
 
-            if (pieceOnField && _leftBound >= 0)
+            for (int i = 0; i < bricks.Count; i++)
             {
-                //Get the sum of free pices to the left
-
-                for (int i = 0; i < bricks.Count; i++)
+                if (!bricks[i].canMoveLeft)
                 {
-                    if (bricks[i].mapPos.x > 0)
-                    {
-                        if (!PlayField[bricks[i].mapPos.x - 1, bricks[i].mapPos.y].ocupied)
-                        {
-                            freePiecesLeft++;
-                            if (freePiecesLeft >= totalPieces) { freePiecesLeft = totalPieces; }
-                        }
-
-                        else if (PlayField[bricks[i].mapPos.x - 1, bricks[i].mapPos.y].ocupied)
-                        {
-                            freePiecesLeft--;
-                            if (freePiecesLeft <= 0) { freePiecesLeft = 0; }
-                        }
-                    }
+                    canMoveLeft = false;
+                    break;
                 }
 
-
-                //Get the sum of free pices to the right
-
-                for (int i = 0; i < bricks.Count; i++)
+                else
                 {
-                    if (!PlayField[bricks[i].mapPos.x + 1, bricks[i].mapPos.y].ocupied)
-                    {
-                        freePiecesRight++;
-                        if (freePiecesRight >= totalPieces) { freePiecesRight = totalPieces; }
-                    }
-
-                    else if (PlayField[bricks[i].mapPos.x + 1, bricks[i].mapPos.y].ocupied)
-                    {
-                        freePiecesRight--;
-                        if (freePiecesRight <= 0) { freePiecesRight = 0; }
-                    }
+                    canMoveLeft = true;
                 }
-
             }
 
-            if (_leftBound <= 0) { freePiecesLeft = 0; }
-            if (_rightBound >= 10) { freePiecesRight = 0; }
 
-            UpdateMoveBooleans();
 
-            Debug.WriteLine($" Total Pieces: {totalPieces}");
-            Debug.WriteLine($"Total can move left: {freePiecesLeft}");
-            Debug.WriteLine($"Total can move right: {freePiecesRight}");
+            for (int i = 0; i < bricks.Count; i++)
+            {
+                if (!bricks[i].canMoveRight)
+                {
+                    canMoveRight = false;
+                    break;
+                }
+
+                else
+                {
+                    canMoveRight = true;
+                }
+            }
+
+               
+
+            if (_leftBound <= 0) { canMoveLeft = false; }
+            if (_rightBound >= 10) { canMoveRight = false; }
+
+
+            //(_leftBound, _rightBound) = GetBounds();
+            Debug.WriteLine($"Left bound: {_leftBound}");
+            Debug.WriteLine($"Right bound: {_rightBound}");
+            Debug.WriteLine($"CanMove Left: {canMoveLeft}");
+            Debug.WriteLine($"CanMove Right: {canMoveRight}");
+            //Debug.WriteLine(pieceOnField);
+
+            //if (pieceOnField && _leftBound >= 0)
+            //{
+            //    //Get the sum of free pices to the left
+
+            //    for (int i = 0; i < bricks.Count; i++)
+            //    {
+            //        if (bricks[i].mapPos.x > 0)
+            //        {
+            //            if (!PlayField[bricks[i].mapPos.x - 1, bricks[i].mapPos.y].ocupied)
+            //            {
+            //                freePiecesLeft++;
+            //                if (freePiecesLeft >= totalPieces) { freePiecesLeft = totalPieces; }
+            //            }
+
+            //            else if (PlayField[bricks[i].mapPos.x - 1, bricks[i].mapPos.y].ocupied)
+            //            {
+            //                freePiecesLeft--;
+            //                if (freePiecesLeft <= 0) { freePiecesLeft = 0; }
+            //            }
+            //        }
+            //    }
+
+
+            //    //Get the sum of free pices to the right
+
+            //    for (int i = 0; i < bricks.Count; i++)
+            //    {
+            //        if (!PlayField[bricks[i].mapPos.x + 1, bricks[i].mapPos.y].ocupied)
+            //        {
+            //            freePiecesRight++;
+            //            if (freePiecesRight >= totalPieces) { freePiecesRight = totalPieces; }
+            //        }
+
+            //        else if (PlayField[bricks[i].mapPos.x + 1, bricks[i].mapPos.y].ocupied)
+            //        {
+            //            freePiecesRight--;
+            //            if (freePiecesRight <= 0) { freePiecesRight = 0; }
+            //        }
+            //    }
+
+            //}
+
+            //if (_leftBound <= 0) { freePiecesLeft = 0; }
+            //if (_rightBound >= 10) { freePiecesRight = 0; }
+
+            //UpdateMoveBooleans();
+
+            //Debug.WriteLine($" Total Pieces: {totalPieces}");
+            //Debug.WriteLine($"Total can move left: {freePiecesLeft}");
+            //Debug.WriteLine($"Total can move right: {freePiecesRight}");
 
 
             //for (int i = 0; i < bricks.Count; i++)
