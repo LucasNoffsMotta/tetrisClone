@@ -49,7 +49,7 @@ namespace Tetris
         public void CheckRectColision(Square[,] PlayField)
 
         {
-            if (Rectangle.Y > 32)
+            if (Rectangle.Y > 32 && mapPos.x > 0)
             {
                 if (PlayField[mapPos.x, mapPos.y + 1].ocupied)
                 {
