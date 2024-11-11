@@ -350,10 +350,6 @@ namespace Tetris
 
 
             //(_leftBound, _rightBound) = GetBounds();
-            Debug.WriteLine($"Left bound: {_leftBound}");
-            Debug.WriteLine($"Right bound: {_rightBound}");
-            Debug.WriteLine($"CanMove Left: {canMoveLeft}");
-            Debug.WriteLine($"CanMove Right: {canMoveRight}");
             //Debug.WriteLine(pieceOnField);
 
             //if (pieceOnField && _leftBound >= 0)
