@@ -1,11 +1,13 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/background3.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/background3.xnb","TextureProcessor","Texture2DContent",11513,2703445,0.3939816
-"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/BackGroundTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/BackGroundTile.xnb","TextureProcessor","Texture2DContent",156,4181,0.0051539
-"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/blueSquare.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/blueSquare.xnb","TextureProcessor","Texture2DContent",148,4181,0.0081182
-"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/darkBluTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/darkBluTile.xnb","TextureProcessor","Texture2DContent",148,4181,0.0067091
-"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/File.spritefont","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/File.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0.1764525
-"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/greenTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/greenTile.xnb","TextureProcessor","Texture2DContent",148,4181,0.0038975
-"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/orangeTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/orangeTile.xnb","TextureProcessor","Texture2DContent",148,4181,0.0039864
-"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/pinkTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/pinkTile.xnb","TextureProcessor","Texture2DContent",155,4181,0.0039196
-"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/redSquare.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/redSquare.xnb","TextureProcessor","Texture2DContent",129,4181,0.0055309
-"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/yellowTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/yellowTile.xnb","TextureProcessor","Texture2DContent",148,4181,0.0051932
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/background3.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/background3.xnb","TextureProcessor","Texture2DContent",11513,2703445,0.1923161
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/BackGroundTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/BackGroundTile.xnb","TextureProcessor","Texture2DContent",156,4181,0.0024031
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/blueSquare.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/blueSquare.xnb","TextureProcessor","Texture2DContent",148,4181,0.0026271
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/darkBluTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/darkBluTile.xnb","TextureProcessor","Texture2DContent",148,4181,0.0022281
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/File.spritefont","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/File.xnb","FontDescriptionProcessor","SpriteFontContent",2068,37922,0.0791611
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/gameoverSquare.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/gameoverSquare.xnb","TextureProcessor","Texture2DContent",138,4181,0.0016064
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/gameoverSquare2.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/gameoverSquare2.xnb","TextureProcessor","Texture2DContent",133,4181,0.0025699
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/greenTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/greenTile.xnb","TextureProcessor","Texture2DContent",148,4181,0.0034716
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/orangeTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/orangeTile.xnb","TextureProcessor","Texture2DContent",148,4181,0.0023387
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/pinkTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/pinkTile.xnb","TextureProcessor","Texture2DContent",155,4181,0.0028073
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/redSquare.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/redSquare.xnb","TextureProcessor","Texture2DContent",129,4181,0.0028326
+"C:/Users/lnoff/source/repos/Tetris/Tetris/Content/yellowTile.png","C:/Users/lnoff/source/repos/Tetris/Tetris/Content/bin/Windows/yellowTile.xnb","TextureProcessor","Texture2DContent",148,4181,0.0024296

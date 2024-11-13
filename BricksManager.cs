@@ -9,7 +9,7 @@ namespace Tetris
 {
     public class BricksManager
     {
-        private List<Brick> bricks;
+        public List<Brick> bricks;
         private List<Tetromines> brickObjects;
         public Tetromines nextTetromineDisplay;
         private Random random;

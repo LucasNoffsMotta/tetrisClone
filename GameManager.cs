@@ -28,8 +28,20 @@ namespace Tetris
         {
             Globals.Update(gt);
             InputManager.Update();
-            _bricksManager.Update(_map.PlayField, _map.Size);
+
+            if (!Globals.GameOver)
+            {
+                _bricksManager.Update(_map.PlayField, _map.Size);
+            }
+
+            else
+            {
+                Effects.GameOverEffect(_map.PlayField, _bricksManager.bricks);
+            }
+            
         }
+
+    
 
         public void Draw()
         {
@@ -40,6 +52,12 @@ namespace Tetris
             _bricksManager.DrawDisplayTetromine();
             Globals.SpriteBatch.DrawString(font, Globals.Score.ToString(), new(220, 160), Color.White);
             Globals.SpriteBatch.DrawString(font, Globals.LinesCleaned.ToString(), new(220, 530), Color.White);
+
+            if (Effects.EffectFinished)
+            {
+                Effects.DrawGameOver();
+            }
+
             Globals.SpriteBatch.End();
         }
     }

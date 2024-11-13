@@ -9,6 +9,8 @@
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/blueSquare.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/darkBluTile.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/File.spritefont</File>
+    <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/gameoverSquare.png</File>
+    <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/gameoverSquare2.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/greenTile.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/orangeTile.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/pinkTile.png</File>
@@ -16,6 +18,8 @@
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/yellowTile.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

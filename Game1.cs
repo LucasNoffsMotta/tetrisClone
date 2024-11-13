@@ -50,10 +50,10 @@ namespace Tetris
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (!Globals.GameOver)
-            {
-                _gameManager.Update(gameTime);
-            }
+
+             _gameManager.Update(gameTime);
+
+
 
             // TODO: Add your update logic here
 
