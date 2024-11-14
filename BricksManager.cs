@@ -10,7 +10,7 @@ namespace Tetris
     public class BricksManager
     {
         public List<Brick> bricks;
-        private List<Tetromines> brickObjects;
+        public List<Tetromines> brickObjects;
         public Tetromines nextTetromineDisplay;
         private Random random;
         private Tetromines currentBrick;
@@ -25,10 +25,17 @@ namespace Tetris
             random = new Random();
             bricks = new List<Brick>();
             brickObjects = new List<Tetromines>();
+            StartBricks();
+        }
+
+
+        public void StartBricks()
+        {
             brickIndex = 0;
             bricktype = brickTypes[random.Next(brickTypes.Length)];
             nextBrick = brickTypes[random.Next(brickTypes.Length)];
             nextTetromineDisplay = new(nextBrick, true);
+            CreateBriks();
         }
 
 
@@ -145,8 +152,6 @@ namespace Tetris
             Globals.Score += addScore;
             Globals.LinesCleaned += 1;
         }
-
-
 
 
         public void CheckFullLines(Square[,] PlayField, Point Size)

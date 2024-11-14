@@ -17,6 +17,7 @@ namespace Tetris
         private static float addToNextRouwCount = 0.3f;
         private static float nextRowCountMax = 1f;
         public static bool EffectFinished = false;
+        private static int TemporaryCount = 0;
         private static SpriteFont font = Globals.Content.Load<SpriteFont>("File");
 
         public static void GameOverEffect(Square[,] PlayField, List<Brick> bricks)
@@ -32,7 +33,8 @@ namespace Tetris
                 bricks[(int)nextRowCount].Texture = gameOvertexture;
             }
 
-            if (nextRowCount >= bricks.Count) { nextRowCount = 0; EffectFinished = true; }
+  
+            else if (nextRowCount >= bricks.Count) { nextRowCount = 0; TemporaryCount++;  EffectFinished = true; }
         }
 
         public static void DrawGameOver()

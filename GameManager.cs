@@ -17,7 +17,6 @@ namespace Tetris
         {
             _map = new Map();
             _bricksManager = new BricksManager();
-            _bricksManager.CreateBriks();
             background = Globals.Content.Load<Texture2D>("background3");
             font = Globals.Content.Load<SpriteFont>("File");
             Globals.Score = 0;
@@ -37,8 +36,12 @@ namespace Tetris
             else
             {
                 Effects.GameOverEffect(_map.PlayField, _bricksManager.bricks);
+
+                if (Effects.EffectFinished)
+                {
+                    LevelManager.Update(_map.PlayField, _bricksManager);
+                }
             }
-            
         }
 
     
