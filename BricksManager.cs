@@ -96,7 +96,7 @@ namespace Tetris
                 if (bricks[j].mapPos.y == line)
                 {
                     bricks[j].Rectangle.Y = (line + 10) * 32;
-                    bricks[j].mapPos.y = (bricks[j].Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
+                    bricks[j].UpdateMapPos();
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace Tetris
                 {
                     PlayField[bricks[j].mapPos.x, bricks[j].mapPos.y].ocupied = false;
                     bricks[j].Rectangle.Y += 32;
-                    bricks[j].mapPos.y = (bricks[j].Rectangle.Y - Globals.PlayFieldStartPos.Y) / 32;
+                    bricks[j].UpdateMapPos();
                     bricks[j].descended = true;
                 }
             }
