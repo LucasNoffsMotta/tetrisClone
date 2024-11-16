@@ -39,3 +39,4 @@ C:\Users\lnoff\source\repos\Tetris\Tetris\obj\Debug\net8.0-windows\Tetris.source
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\background3.xnb
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\gameoverSquare.xnb
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\gameoverSquare2.xnb
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\background4.xnb

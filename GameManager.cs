@@ -17,7 +17,7 @@ namespace Tetris
         {
             _map = new Map();
             _bricksManager = new BricksManager();
-            background = Globals.Content.Load<Texture2D>("background3");
+            background = Globals.Content.Load<Texture2D>("background4");
             font = Globals.Content.Load<SpriteFont>("File");
             Globals.Level = 0;
             Globals.Score = 0;
@@ -56,6 +56,7 @@ namespace Tetris
             _bricksManager.DrawDisplayTetromine();
             Globals.SpriteBatch.DrawString(font, Globals.Score.ToString(), new(220, 160), Color.White);
             Globals.SpriteBatch.DrawString(font, Globals.LinesCleaned.ToString(), new(220, 530), Color.White);
+            Globals.SpriteBatch.DrawString(font, Globals.Level.ToString(), new(235, 325), Color.White);
 
             if (Effects.EffectFinished)
             {

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,19 +10,35 @@ namespace Tetris
 {
     public static class LevelManager
     {
+        public static Dictionary<int, float> speedDictionary = new Dictionary<int, float>();
 
-        public static void UpdateLevel()
+        public static void UpdateLevel(Tetromines currentTetromine)
         {
             if (Globals.LinesCleaned % 10 == 0)
             {
                 Globals.Level += 1;
+                currentTetromine.UpdateFallingSpeed();
             }
         }
 
-        //public static void UpdateSpeed()
-        //{
-        //    if ()
-        //}
+        public static Dictionary<int,float> SpeedData()
+        {
+            speedDictionary[0] = 0.8f;
+            speedDictionary[1] = 0.71f;
+            speedDictionary[2] = 1.26f;
+            speedDictionary[3] = 1.45f;
+            speedDictionary[4] = 1.71f;
+            speedDictionary[5] = 2.08f;
+            speedDictionary[6] = 2.66f;
+            speedDictionary[7] = 3.69f;
+            speedDictionary[8] = 6f;
+            speedDictionary[9] = 8f;
+            speedDictionary[10] = 9.6f;
+
+            return speedDictionary;
+        }
+
+
 
         public static void ReestartGame(Square[,] PlayField, BricksManager _bricksManager)
         {
@@ -38,6 +55,7 @@ namespace Tetris
             _bricksManager.StartBricks();
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
+            Globals.Level = 0;
             Effects.EffectFinished = false;
             Globals.GameOver = false;
         }

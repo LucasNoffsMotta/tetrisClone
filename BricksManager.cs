@@ -151,7 +151,7 @@ namespace Tetris
             int addScore = 40 * (Globals.Level + 1);
             Globals.Score += addScore;
             Globals.LinesCleaned += 1;
-            LevelManager.UpdateLevel();
+            LevelManager.UpdateLevel(currentBrick);
         }
 
 

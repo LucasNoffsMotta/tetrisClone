@@ -16,10 +16,11 @@ namespace Tetris
         private char bricktype;
         public bool alive, canMoveLeft, canMoveRight, canRespawn, pieceOnField, canMoveDown, timerCounting;
         public int _leftBound, _rightBound, _bottomBound, boxSize, dropScore, totalPieces, freePiecesLeft, freePiecesRight;
-        public float rotationTimer, rotationTimerLimit, fallSpeed, fallTrigger, fallCount, sideMoveTimer, sideMoveCount;
+        public float rotationTimer, rotationTimerLimit, TotalTimeBeforeDrop, fallTrigger, fallCount, totalTimeToMoveSides, sideMoveCount, sideMoveAddToCount;
         public Point[,] boundBox;
         public List<Point> shapePosOnBox;
         private bool moveCounting, softDropScoring;
+        private Dictionary<int, float> dropSpeed;
         bool rotateClock = true, rotateCounter = true;
 
         public Tetromines(char _bricktype, bool display = false)
@@ -34,21 +35,23 @@ namespace Tetris
             {
                 initialPos = (int)random.Next(0, (Globals.PlayFieldSize.X / 32) - 4);
                 CreateBricks(bricktype);
+                dropSpeed = LevelManager.SpeedData();
                 alive = true;
                 pieceOnField = false;
                 rotationTimerLimit = 2f;
-                fallSpeed = 48f;
+                TotalTimeBeforeDrop = 48f;
                 fallTrigger = 0;
-                fallCount = 1.25f;
-                sideMoveTimer = 0.5f;
+                fallCount = dropSpeed[Globals.Level];
+                totalTimeToMoveSides = 0.5f;
                 sideMoveCount = 0;
+                sideMoveAddToCount = 0.1f;               
                 softDropScoring = false;
                 dropScore = 0;
                 canMoveDown = true;
                 (_leftBound, _rightBound) = GetBounds();
                 totalPieces = bricks.Count;
                 freePiecesLeft = 0;
-                freePiecesRight = 0;
+                freePiecesRight = 0;              
                 if (bricktype != 'O') { CreateBoundBox(); }
             }
 
@@ -122,12 +125,17 @@ namespace Tetris
             }
         }
 
+        public void UpdateFallingSpeed()
+        {
+            fallCount = dropSpeed[Globals.Level];
+        }
+
 
         public void MoveDown()
         {
             fallTrigger += fallCount;
 
-            if (fallTrigger >= fallSpeed && canMoveDown)
+            if (fallTrigger >= TotalTimeBeforeDrop && canMoveDown)
             {
                 for (int i = 0; i < bricks.Count; i++)
                 {
@@ -155,27 +163,28 @@ namespace Tetris
 
             if (InputManager.KeybordPressed.IsKeyDown(Keys.Down))
             {
-                fallCount = 0.5f;
+                fallCount = 24;
                 softDropScoring = true;
             }
 
             else if (InputManager.KeybordPressed.IsKeyUp(Keys.Down))
             {
-                fallCount = 0.1f;
+                fallCount = dropSpeed[Globals.Level];
                 softDropScoring = false;
             }
+            Debug.WriteLine(fallCount);
         }
 
         public void MoveTimerSides()
         {
-            if (moveCounting) { sideMoveCount += fallCount; }
-            if (sideMoveCount >= sideMoveTimer) { sideMoveCount = 0; moveCounting = false; }
+            if (moveCounting) { sideMoveCount += sideMoveAddToCount; }
+            if (sideMoveCount >= totalTimeToMoveSides) { sideMoveCount = 0; moveCounting = false; }
         }
 
         public void MoveSides(Square[,] PlayField, Point Size)
         {
             CheckIfCanMove(PlayField);
-            if (InputManager.KeybordPressed.IsKeyDown(Keys.Left) && !moveCounting && fallCount != 0.5f)
+            if (InputManager.KeybordPressed.IsKeyDown(Keys.Left) && !moveCounting && fallCount != 24)
             {
                 if (canMoveLeft)
                 {
@@ -198,7 +207,7 @@ namespace Tetris
                 }
             }
 
-            else if (InputManager.KeybordPressed.IsKeyDown(Keys.Right) && !moveCounting && fallCount != 0.5f)
+            else if (InputManager.KeybordPressed.IsKeyDown(Keys.Right) && !moveCounting && fallCount != 24)
             {
                 if (canMoveRight)
                 {
@@ -393,7 +402,7 @@ namespace Tetris
 
             for (int i = 0; i < bricks.Count; i++)
             {
-                bricks[i].Update(PlayField, canMoveLeft, canMoveRight, fallTrigger, fallSpeed);
+                bricks[i].Update(PlayField, canMoveLeft, canMoveRight, fallTrigger, TotalTimeBeforeDrop);
             }
 
             CheckFallColision(PlayField, Size);         
