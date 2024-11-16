@@ -152,6 +152,12 @@
 /processorParam:TextureFormat=Color
 /build:redSquare.png
 
+#begin tetris-theme-korobeiniki-rearranged-arr-for-strings-185592.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:tetris-theme-korobeiniki-rearranged-arr-for-strings-185592.mp3
+
 #begin yellowTile.png
 /importer:TextureImporter
 /processor:TextureProcessor

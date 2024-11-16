@@ -16,9 +16,11 @@
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/orangeTile.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/pinkTile.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/redSquare.png</File>
+    <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/tetris-theme-korobeiniki-rearranged-arr-for-strings-185592.mp3</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/yellowTile.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -22,6 +22,7 @@ namespace Tetris
             Globals.Level = 0;
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
+            Effects.PlaySoundtrack();         
         }
 
         public void Update(GameTime gt)
@@ -56,7 +57,7 @@ namespace Tetris
             _bricksManager.DrawDisplayTetromine();
             Globals.SpriteBatch.DrawString(font, Globals.Score.ToString(), new(220, 160), Color.White);
             Globals.SpriteBatch.DrawString(font, Globals.LinesCleaned.ToString(), new(220, 530), Color.White);
-            Globals.SpriteBatch.DrawString(font, Globals.Level.ToString(), new(235, 325), Color.White);
+            Globals.SpriteBatch.DrawString(font, Globals.Level.ToString(), new(240, 325), Color.White);
 
             if (Effects.EffectFinished)
             {
