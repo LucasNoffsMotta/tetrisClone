@@ -148,9 +148,10 @@ namespace Tetris
 
         public void AddScore()
         {
-            int addScore = 40;
+            int addScore = 40 * (Globals.Level + 1);
             Globals.Score += addScore;
             Globals.LinesCleaned += 1;
+            LevelManager.UpdateLevel();
         }
 
 

@@ -37,9 +37,9 @@ namespace Tetris
                 alive = true;
                 pieceOnField = false;
                 rotationTimerLimit = 2f;
-                fallSpeed = 4f;
+                fallSpeed = 48f;
                 fallTrigger = 0;
-                fallCount = 0.1f;
+                fallCount = 1.25f;
                 sideMoveTimer = 0.5f;
                 sideMoveCount = 0;
                 softDropScoring = false;

@@ -19,6 +19,7 @@ namespace Tetris
             _bricksManager = new BricksManager();
             background = Globals.Content.Load<Texture2D>("background3");
             font = Globals.Content.Load<SpriteFont>("File");
+            Globals.Level = 0;
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
         }

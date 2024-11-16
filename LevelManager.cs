@@ -10,6 +10,19 @@ namespace Tetris
     public static class LevelManager
     {
 
+        public static void UpdateLevel()
+        {
+            if (Globals.LinesCleaned % 10 == 0)
+            {
+                Globals.Level += 1;
+            }
+        }
+
+        //public static void UpdateSpeed()
+        //{
+        //    if ()
+        //}
+
         public static void ReestartGame(Square[,] PlayField, BricksManager _bricksManager)
         {
             for (int x = 0; x < PlayField.GetLength(0); x++)
