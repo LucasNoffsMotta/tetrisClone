@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 
 namespace Tetris
@@ -55,7 +56,7 @@ namespace Tetris
             _bricksManager.Draw();
             Globals.SpriteBatch.Draw(background, new Vector2(0, 0), Color.White);
             _bricksManager.DrawDisplayTetromine();
-            Globals.SpriteBatch.DrawString(font, Globals.Score.ToString(), new(220, 160), Color.White);
+            Globals.SpriteBatch.DrawString(font, Globals.Score.ToString(), new(150, 160), Color.White);
             Globals.SpriteBatch.DrawString(font, Globals.LinesCleaned.ToString(), new(220, 530), Color.White);
             Globals.SpriteBatch.DrawString(font, Globals.Level.ToString(), new(240, 325), Color.White);
 

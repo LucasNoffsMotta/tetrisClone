@@ -42,6 +42,7 @@ namespace Tetris
         public static void PlaySoundtrack()
         {
             MediaPlayer.Play(mainMusic);
+            MediaPlayer.Volume = 0f;
         }
 
         public static void DrawGameOver()

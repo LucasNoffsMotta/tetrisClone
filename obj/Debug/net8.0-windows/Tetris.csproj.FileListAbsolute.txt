@@ -42,3 +42,4 @@ C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\gameo
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\background4.xnb
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\tetris-theme-korobeiniki-rearranged-arr-for-strings-185592.wma
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\tetris-theme-korobeiniki-rearranged-arr-for-strings-185592.xnb
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
