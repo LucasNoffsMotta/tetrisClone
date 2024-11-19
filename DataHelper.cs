@@ -9,15 +9,17 @@ using System.IO;
 using System.Diagnostics;
 using SharpDX.MediaFoundation.DirectX;
 using Newtonsoft.Json;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Tetris
 {
     public static class DataHelper
     {
-        private static List<Dictionary<string, string>> playersOnJson = new List<Dictionary<string, string>>();
         private static Dictionary<string, string> playerData = new Dictionary<string, string>();
-        private static List<Dictionary<string, string>> readPlayerData = new List<Dictionary<string, string>>();
+        private static List<Dictionary<string, string>> jsonFormatPlayerData = new List<Dictionary<string, string>>();
         private static string fileName = "playerData.json";
+        public static List<int> scores = new List<int>();
+        public static List<int> levels = new List<int>();
         
 
         public static void LoadJson()
@@ -33,7 +35,21 @@ namespace Tetris
         {
             using StreamReader r = new(fileName);
             string jsonScoreList = r.ReadToEnd();
-            readPlayerData = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(File.ReadAllText(fileName));
+            jsonFormatPlayerData = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(File.ReadAllText(fileName));
+            OrganizePlayerDataList();
+        }
+
+        public static void OrganizePlayerDataList()
+        {
+            for(int i = 0; i < jsonFormatPlayerData.Count; i++)
+            {
+                scores.Add(int.Parse(jsonFormatPlayerData[i]["score"]));
+                levels.Add(int.Parse(jsonFormatPlayerData[i]["level"]));
+            }
+            scores.Sort();
+            scores.Reverse();
+            levels.Sort();
+            levels.Reverse();
         }
 
 
@@ -52,8 +68,8 @@ namespace Tetris
                 CreateJson();
             }
 
-            readPlayerData.Add(playerData);
-            string jsonData = System.Text.Json.JsonSerializer.Serialize(readPlayerData);
+            jsonFormatPlayerData.Add(playerData);
+            string jsonData = System.Text.Json.JsonSerializer.Serialize(jsonFormatPlayerData);
             File.WriteAllText(fileName, jsonData);
         }
 

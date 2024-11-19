@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:background4.png
 
+#begin background5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:background5.png
+
 #begin BackGroundTile.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -18,12 +18,13 @@ namespace Tetris
         {
             _map = new Map();
             _bricksManager = new BricksManager();
-            background = Globals.Content.Load<Texture2D>("background4");
+            background = Globals.Content.Load<Texture2D>("background5");
             font = Globals.Content.Load<SpriteFont>("File");
             Globals.Level = 0;
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
-            Effects.PlaySoundtrack();         
+            Effects.PlaySoundtrack();
+            //DataHelper.LoadJson();
         }
 
         public void Update(GameTime gt)
@@ -59,6 +60,8 @@ namespace Tetris
             Globals.SpriteBatch.DrawString(font, Globals.Score.ToString(), new(150, 160), Color.White);
             Globals.SpriteBatch.DrawString(font, Globals.LinesCleaned.ToString(), new(220, 530), Color.White);
             Globals.SpriteBatch.DrawString(font, Globals.Level.ToString(), new(240, 325), Color.White);
+            Ranking.Draw();
+
 
             if (Effects.EffectFinished)
             {
