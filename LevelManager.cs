@@ -54,6 +54,7 @@ namespace Tetris
             _bricksManager.brickObjects.Clear();
             _bricksManager.StartBricks();
             DataHelper.SaveScore();
+            DataHelper.LoadJson();
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
             Globals.Level = 0;

@@ -41,11 +41,16 @@ namespace Tetris
 
         public static void OrganizePlayerDataList()
         {
+
+            scores.Clear();
+            levels.Clear();
+
             for(int i = 0; i < jsonFormatPlayerData.Count; i++)
             {
                 scores.Add(int.Parse(jsonFormatPlayerData[i]["score"]));
                 levels.Add(int.Parse(jsonFormatPlayerData[i]["level"]));
             }
+
             scores.Sort();
             scores.Reverse();
             levels.Sort();

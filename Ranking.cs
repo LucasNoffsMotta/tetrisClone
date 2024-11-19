@@ -25,7 +25,6 @@ namespace Tetris
                 {
                     Globals.SpriteBatch.DrawString(font, DataHelper.scores[i].ToString(), rankingPositions[i], Color.White);
                 }
-
             }           
         }
 

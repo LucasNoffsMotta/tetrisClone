@@ -24,7 +24,7 @@ namespace Tetris
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
             Effects.PlaySoundtrack();
-            //DataHelper.LoadJson();
+            DataHelper.LoadJson();
         }
 
         public void Update(GameTime gt)
