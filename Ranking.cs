@@ -19,7 +19,7 @@ namespace Tetris
 
         public static void Draw()
         {
-            if (DataHelper.scores.Count > 0 && DataHelper.scores.Count > 3)
+            if (DataHelper.scores.Count > 0 && DataHelper.scores.Count >= 3)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -27,6 +27,5 @@ namespace Tetris
                 }
             }           
         }
-
     }
 }

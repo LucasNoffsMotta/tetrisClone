@@ -16,7 +16,7 @@ namespace Tetris
         public static Texture2D gameOvertexture;
         public static Texture2D effectSquare;
         private static float nextRowCount = 0;
-        private static float addToNextRouwCount = 0.3f;
+        private static float addToNextRouwCount = 0.5f;
         private static float nextRowCountMax = 1f;
         public static bool EffectFinished = false;
         private static int TemporaryCount = 0;
@@ -42,7 +42,6 @@ namespace Tetris
         public static void PlaySoundtrack()
         {
             MediaPlayer.Play(mainMusic);
-            MediaPlayer.Volume = 0f;
         }
 
         public static void DrawGameOver()
