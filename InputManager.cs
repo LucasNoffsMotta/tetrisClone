@@ -33,7 +33,6 @@ namespace Tetris
             
 
             KeybordPressed = Keyboard.GetState();
-
             var mouseState = Mouse.GetState();
             MouseClicked = mouseState.LeftButton == ButtonState.Pressed && _lastMouseState.LeftButton == ButtonState.Released;
             MouseRightClicked = mouseState.RightButton == ButtonState.Pressed && _lastMouseState.RightButton == ButtonState.Released;

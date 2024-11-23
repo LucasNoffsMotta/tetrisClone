@@ -20,7 +20,9 @@ namespace Tetris
             _bricksManager = new BricksManager();
             background = Globals.Content.Load<Texture2D>("background5");
             font = Globals.Content.Load<SpriteFont>("File");
-            Globals.Level = 0;
+            UIScreens.CreateGameStates();
+            UIScreens.CreateMenuMainMenuButtons();
+            UIScreens.CreateLevelMenuButtons();
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
             Effects.PlaySoundtrack();
@@ -53,14 +55,25 @@ namespace Tetris
         public void Draw()
         {
             Globals.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
-            _map.Draw();
-            _bricksManager.Draw();
-            Globals.SpriteBatch.Draw(background, new Vector2(0, 0), Color.White);
-            _bricksManager.DrawDisplayTetromine();
-            Globals.SpriteBatch.DrawString(font, Globals.Score.ToString(), new(150, 160), Color.White);
-            Globals.SpriteBatch.DrawString(font, Globals.LinesCleaned.ToString(), new(220, 530), Color.White);
-            Globals.SpriteBatch.DrawString(font, Globals.Level.ToString(), new(240, 325), Color.White);
-            Ranking.Draw();
+
+            if (!UIScreens.GameStates["StartGame"])
+            {
+                UIScreens.Draw();
+            }
+
+
+            else if (UIScreens.GameStates["StartGame"])
+            {
+                _map.Draw();
+                _bricksManager.Draw();
+                Globals.SpriteBatch.Draw(background, new Vector2(0, 0), Color.White);
+                _bricksManager.DrawDisplayTetromine();
+                Globals.SpriteBatch.DrawString(font, Globals.Score.ToString(), new(150, 160), Color.White);
+                Globals.SpriteBatch.DrawString(font, Globals.LinesCleaned.ToString(), new(220, 530), Color.White);
+                Globals.SpriteBatch.DrawString(font, Globals.Level.ToString(), new(240, 325), Color.White);
+                Ranking.Draw();
+            }
+           
 
 
             if (Effects.EffectFinished)
