@@ -60,6 +60,8 @@ namespace Tetris
             Globals.Level = 0;
             Effects.EffectFinished = false;
             Globals.GameOver = false;
+            UIScreens.GameStates["StartGame"] = false;
+            UIScreens.GameStates["StartScreen"] = true;
         }
 
         public static void Update(Square[,] PlayField, BricksManager _bricksManager)

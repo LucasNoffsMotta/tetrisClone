@@ -113,7 +113,18 @@ namespace Tetris
 
                 for (int i = 0; i < 10; i ++)
                 {
-                    Globals.SpriteBatch.DrawString(menuFont, i.ToString(), numberStringArray[i], Color.Red);
+                 
+                    Rectangle hoverLevelButton = new Rectangle ((int)LevelMenuButtons[i.ToString()].X, (int)LevelMenuButtons[i.ToString()].Y, 75,75);
+
+                    if (hoverLevelButton.Contains(InputManager.MouseRect.X, InputManager.MouseRect.Y))
+                    {
+                        Globals.SpriteBatch.DrawString(menuFont, i.ToString(), numberStringArray[i], Color.Yellow);
+                    }
+                    else
+                    {
+                        Globals.SpriteBatch.DrawString(menuFont, i.ToString(), numberStringArray[i], Color.Red);
+                    }
+                    
                 }
 
             }
