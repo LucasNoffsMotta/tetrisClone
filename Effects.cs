@@ -22,6 +22,7 @@ namespace Tetris
         private static int TemporaryCount = 0;
         private static SpriteFont font = Globals.Content.Load<SpriteFont>("File");
         private static Song mainMusic = Globals.Content.Load<Song>("tetris-theme-korobeiniki-rearranged-arr-for-strings-185592");
+        public static float musicVolume = 1f;
 
         public static void GameOverEffect(Square[,] PlayField, List<Brick> bricks)
         {
@@ -43,6 +44,8 @@ namespace Tetris
         {
             MediaPlayer.Play(mainMusic);
         }
+
+
 
         public static void DrawGameOver()
         {

@@ -23,6 +23,7 @@ namespace Tetris
             UIScreens.CreateGameStates();
             UIScreens.CreateMenuMainMenuButtons();
             UIScreens.CreateLevelMenuButtons();
+            UIScreens.CreateOptionsButtons();
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
             Effects.PlaySoundtrack();
@@ -33,6 +34,7 @@ namespace Tetris
         {
             Globals.Update(gt);
             InputManager.Update();
+
 
             if (UIScreens.GameStates["StartGame"])
             {

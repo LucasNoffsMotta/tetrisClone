@@ -49,3 +49,5 @@ C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\Secon
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\mainMenuScreen.xnb
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\hoverSurface.xnb
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\levelScreen.xnb
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\optionsFont.xnb
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\optionsScreen.xnb
