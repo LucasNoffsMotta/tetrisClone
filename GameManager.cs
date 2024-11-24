@@ -34,19 +34,27 @@ namespace Tetris
             Globals.Update(gt);
             InputManager.Update();
 
-            if (!Globals.GameOver)
+            if (UIScreens.GameStates["StartGame"])
             {
-                _bricksManager.Update(_map.PlayField, _map.Size);
+                if (!Globals.GameOver)
+                {
+                    _bricksManager.Update(_map.PlayField, _map.Size);
+                }
+
+                else
+                {
+                    Effects.GameOverEffect(_map.PlayField, _bricksManager.bricks);
+
+                    if (Effects.EffectFinished)
+                    {
+                        LevelManager.Update(_map.PlayField, _bricksManager);
+                    }
+                }
             }
 
-            else
+            else if (!UIScreens.GameStates["StartGame"])
             {
-                Effects.GameOverEffect(_map.PlayField, _bricksManager.bricks);
-
-                if (Effects.EffectFinished)
-                {
-                    LevelManager.Update(_map.PlayField, _bricksManager);
-                }
+                UIScreens.Update();
             }
         }
 

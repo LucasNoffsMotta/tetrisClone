@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +12,21 @@ namespace Tetris
 {
     public static class UIScreens
     {
-        public static Texture2D startScreen;
-        public static Texture2D menuUI;
+        public static Texture2D startScreen =  Globals.Content.Load<Texture2D>("startScreen");
+        public static Texture2D mainMenuUI = Globals.Content.Load<Texture2D>("mainMenuScreen");
+        public static Texture2D hoverSurface = Globals.Content.Load<Texture2D>("hoverSurface");
+        public static Texture2D levelScreen = Globals.Content.Load<Texture2D>("levelScreen");
         public static Texture2D levelChoiceUI;
         public static Dictionary<string, bool> GameStates = new Dictionary<string, bool>();
         public static Dictionary<string, Vector2> MainMenuButtons = new Dictionary<string, Vector2>();
         public static Dictionary<string, Vector2> LevelMenuButtons = new Dictionary<string, Vector2>();
+        public static SpriteFont menuFont = Globals.Content.Load<SpriteFont>("SecondFont");
+        private static Color startMenucolor = Color.DarkTurquoise;
+        private static float menuBlinkCounter = 0;
+        private static int colorMultiplicator = 1;
+        private static Vector2[] numberStringArray = new Vector2[10];
+        //private static float menuBlinkMultiplicator = colorMultiplicators[(int)menuBlinkCounter];
+
 
 
         public static void CreateGameStates()
@@ -29,40 +39,83 @@ namespace Tetris
 
         public static void CreateMenuMainMenuButtons()
         {
-            MainMenuButtons["StartGame"] = new(200, 200);
-            MainMenuButtons["MusicVolum1"] = new(200, 300);
-            MainMenuButtons["MusicVolum2"] = new(200, 400);
-            MainMenuButtons["MusicVolum3"] = new(200, 500);
-            MainMenuButtons["MusicVolumOff"] = new(200, 600);
+            MainMenuButtons["StartGame"] = new(365, 231);
+            MainMenuButtons["Options"] = new(365, 331);
+            MainMenuButtons["Exit"] = new(365, 431);
+
         }
 
         public static void CreateLevelMenuButtons()
         {
-            Vector2 firstpos = new Vector2(200,200);
+            Vector2 firstpos = new Vector2(214,464);
+            Vector2 numberStringPos = new Vector2(240, 470);
 
             for (int i = 0; i < 10; i++)
             {
+                if (i == 5)
+                {
+                    firstpos = new Vector2(214, 464);
+                    numberStringPos = new Vector2(240, 470);
+                    firstpos.Y += 77;
+                    numberStringPos.Y += 80;
+                }
+
                 LevelMenuButtons[i.ToString()] = new(firstpos.X, firstpos.Y);
-                firstpos.X += 20;
+                numberStringArray[i] = numberStringPos;
+                firstpos.X += 86;
+                numberStringPos.X += 85;           
             }
         }
 
 
         public static void Draw()
         {
+            
             if (GameStates["StartScreen"])
             {
                 Globals.SpriteBatch.Draw(startScreen, new Vector2(0, 0), Color.White);
+                menuBlinkCounter += 0.05f;
+                Globals.SpriteBatch.DrawString(menuFont, "Press Enter to Start", new Vector2(280, 470), Color.DarkTurquoise * colorMultiplicator);
+                if (menuBlinkCounter > 1f)
+                {
+                    menuBlinkCounter = 0f;
+                    switch (colorMultiplicator)
+                    {
+                        case 0:
+                            colorMultiplicator = 1;
+                            break;
+                        case 1:
+                            colorMultiplicator = 0;
+                            break;                            
+                    }
+                }             
             }
 
             else if (GameStates["MenuScreen"])
             {
-                Globals.SpriteBatch.Draw(startScreen, new Vector2(0, 0), Color.White);
+                Globals.SpriteBatch.Draw(mainMenuUI, new Vector2(0, 0), Color.White);
+
+                foreach (KeyValuePair<string, Vector2> button in MainMenuButtons)
+                {
+                    Rectangle buttonPos = new Rectangle((int)button.Value.X, (int)button.Value.Y, 240, 65);
+
+                    if (buttonPos.Contains(InputManager.MouseRect.X, InputManager.MouseRect.Y))
+                    {
+                        Globals.SpriteBatch.Draw(hoverSurface, buttonPos, Color.White);
+                    }
+                }
+
             }
 
             else if (GameStates["LevelSelectionScreen"])
             {
-                Globals.SpriteBatch.Draw(startScreen, new Vector2(0, 0), Color.White);
+                Globals.SpriteBatch.Draw(levelScreen, new Vector2(0, 0), Color.White);
+
+                for (int i = 0; i < 10; i ++)
+                {
+                    Globals.SpriteBatch.DrawString(menuFont, i.ToString(), numberStringArray[i], Color.Red);
+                }
+
             }
         }
 
@@ -82,13 +135,14 @@ namespace Tetris
                 string clicked = "";
                 foreach (KeyValuePair<string,Vector2> button in MainMenuButtons)
                 {
-                    Rectangle buttonPos = new Rectangle((int)button.Value.X, (int)button.Value.Y, 50, 50);
+                    Rectangle buttonPos = new Rectangle((int)button.Value.X, (int)button.Value.Y, 300, 50);
 
                     if (buttonPos.Contains(InputManager.MouseRect.X, InputManager.MouseRect.Y) && InputManager.MouseClicked)
                     {
                         clicked = button.Key;
                     }
                 }
+                Debug.WriteLine(clicked);
 
                 switch (clicked)
                 {
@@ -97,21 +151,14 @@ namespace Tetris
                         GameStates["LevelSelectionScreen"] = true;
                         break;
 
-                    case "MusicVolum1":
+                    case "Options":
                         //Effects manager
                         break;
 
-                    case "MusicVolum2":
-                        //Effects manager
+                    case "Exit":
+                        GameStates["MenuScreen"] = false;
+                        GameStates["StartScreen"] = true;
                         break;
-
-                    case "MusicVolum3":
-                        //Effects manager
-                        break;
-                    case "MusicVolumOff":
-                        //Effects manager
-                        break;
-
                 }               
             }
 
@@ -121,13 +168,13 @@ namespace Tetris
 
                 foreach (KeyValuePair<string, Vector2> button in LevelMenuButtons)
                 {
-                    Rectangle buttonPos = new Rectangle((int)button.Value.X, (int)button.Value.Y, 50, 50);
+                    Rectangle buttonPos = new Rectangle((int)button.Value.X, (int)button.Value.Y, 75, 75);
 
                     if (buttonPos.Contains(InputManager.MouseRect.X, InputManager.MouseRect.Y) && InputManager.MouseClicked)
                     {
                         Globals.Level = int.Parse(button.Key);
                         GameStates["LevelSelectionScreen"] = false;
-                        GameStates["LevelSelectionScreen"] = true;
+                        GameStates["StartGame"] = true;
                         break;
                     }
                 }             

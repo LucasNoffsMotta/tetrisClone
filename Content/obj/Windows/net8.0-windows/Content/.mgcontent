@@ -14,13 +14,23 @@
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/gameoverSquare.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/gameoverSquare2.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/greenTile.png</File>
+    <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/hoverSurface.png</File>
+    <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/levelScreen.png</File>
+    <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/mainMenuScreen.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/orangeTile.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/pinkTile.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/redSquare.png</File>
+    <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/SecondFont.spritefont</File>
+    <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/startScreen.png</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/tetris-theme-korobeiniki-rearranged-arr-for-strings-185592.mp3</File>
     <File>C:/Users/lnoff/source/repos/Tetris/Tetris/Content/yellowTile.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
