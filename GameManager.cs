@@ -24,6 +24,7 @@ namespace Tetris
             UIScreens.CreateMenuMainMenuButtons();
             UIScreens.CreateLevelMenuButtons();
             UIScreens.CreateOptionsButtons();
+            UIScreens.CreateSoundBar();
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
             Effects.PlaySoundtrack();

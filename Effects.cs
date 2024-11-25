@@ -45,6 +45,12 @@ namespace Tetris
             MediaPlayer.Play(mainMusic);
         }
 
+        public static void PauseMusic()
+        {
+            MediaPlayer.Pause();
+            Debug.WriteLine("Pause music");
+        }
+
 
 
         public static void DrawGameOver()
