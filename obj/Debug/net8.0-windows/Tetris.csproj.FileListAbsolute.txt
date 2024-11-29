@@ -52,3 +52,10 @@ C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\level
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\optionsFont.xnb
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\optionsScreen.xnb
 C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\soundBarSquare.xnb
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\cossack-dance-edm-russian-tetris-electronika-151723.wma
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\cossack-dance-edm-russian-tetris-electronika-151723.xnb
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\rasputin-russia-tetris-game-cossack-puzzle-soundtrack-mystery-148250.wma
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\rasputin-russia-tetris-game-cossack-puzzle-soundtrack-mystery-148250.xnb
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.wma
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.xnb
+C:\Users\lnoff\source\repos\Tetris\Tetris\bin\Debug\net8.0-windows\Content\musicNameFont.xnb

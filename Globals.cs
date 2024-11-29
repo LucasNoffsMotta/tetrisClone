@@ -21,11 +21,17 @@ namespace Tetris
         public static float Time { get; set; }
 
         public static Point WindowSize { get; set; }
+
         public static Point PlayFieldSize { get; set; }
+
         public static Point PlayFieldStartPos { get; set; }
+
         public static bool GameOver { get; set; }
+
         public static int Score { get; set; }
+
         public static int Level { get; set; }
+
 
         public static int LinesCleaned { get; set; }
 

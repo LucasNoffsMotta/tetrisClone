@@ -21,8 +21,23 @@ namespace Tetris
         public static bool EffectFinished = false;
         private static int TemporaryCount = 0;
         private static SpriteFont font = Globals.Content.Load<SpriteFont>("File");
-        private static Song mainMusic = Globals.Content.Load<Song>("tetris-theme-korobeiniki-rearranged-arr-for-strings-185592");
+        //private static Song music1 = Globals.Content.Load<Song>("tetris-theme-korobeiniki-rearranged-arr-for-strings-185592");
+        //private static Song music2 = Globals.Content.Load<Song>("cossack-dance-edm-russian-tetris-electronika-151723");
+        //private static Song music3 = Globals.Content.Load<Song>("rasputin-russia-tetris-game-cossack-puzzle-soundtrack-mystery-148250");
+        //private static Song music4 = Globals.Content.Load<Song>("tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978");
+
+        public static List<Song> songs = new List<Song> {LoadMusic("tetris-theme-korobeiniki-rearranged-arr-for-strings-185592"),
+            LoadMusic("cossack-dance-edm-russian-tetris-electronika-151723"),
+            LoadMusic("rasputin-russia-tetris-game-cossack-puzzle-soundtrack-mystery-148250"), 
+            LoadMusic("tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978")};
+
         public static float musicVolume = 1f;
+
+        private static Song LoadMusic(string musicName)
+        {
+            Song music;
+            return music = Globals.Content.Load<Song>(musicName);
+        }
 
         public static void GameOverEffect(Square[,] PlayField, List<Brick> bricks)
         {
@@ -40,9 +55,9 @@ namespace Tetris
             else if (nextRowCount >= bricks.Count) { nextRowCount = 0; TemporaryCount++;  EffectFinished = true; }
         }
 
-        public static void PlaySoundtrack()
+        public static void PlaySoundtrack(int musicIndex)
         {
-            MediaPlayer.Play(mainMusic);
+            MediaPlayer.Play(songs[musicIndex]);
         }
 
         public static void PauseMusic()
@@ -50,7 +65,6 @@ namespace Tetris
             MediaPlayer.Pause();
             Debug.WriteLine("Pause music");
         }
-
 
 
         public static void DrawGameOver()

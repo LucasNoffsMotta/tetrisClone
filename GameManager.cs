@@ -27,7 +27,7 @@ namespace Tetris
             UIScreens.CreateSoundBar();
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
-            Effects.PlaySoundtrack();
+            Effects.PlaySoundtrack(UIScreens.musicIndex);
             DataHelper.LoadJson();
         }
 

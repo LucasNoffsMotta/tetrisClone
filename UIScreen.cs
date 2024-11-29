@@ -26,6 +26,7 @@ namespace Tetris
         public static Dictionary<string, Vector2> optionsButtons = new Dictionary<string, Vector2>();
         public static SpriteFont menuFont = Globals.Content.Load<SpriteFont>("SecondFont");
         public static SpriteFont optionsFont = Globals.Content.Load<SpriteFont>("optionsFont");
+        public static SpriteFont musicNameFont = Globals.Content.Load<SpriteFont>("musicNameFont");
         private static Color startMenucolor = Color.DarkTurquoise;
         private static float menuBlinkCounter = 0;
         private static int colorMultiplicator = 1;
@@ -33,6 +34,8 @@ namespace Tetris
         private static List<Texture2D> soundBar = new List<Texture2D>();
         private static Vector2 soundBarinitialpos = new(435, 200);
         private static List<Vector2> soundBarPos = new List<Vector2>();
+        private static List<string> musicNames = new List<string> { "Music 1", "Music 2", "Music 3", "Music 4"};
+        public static int musicIndex = 0;  
 
 
 
@@ -82,6 +85,7 @@ namespace Tetris
             optionsButtons["forwardMusic"] = new(600, 345);
             optionsButtons["Back"] = new(427,507);
         }
+
 
         public static void CreateSoundBar()
         {
@@ -175,6 +179,8 @@ namespace Tetris
                 {
                     Globals.SpriteBatch.Draw(soundBar[i], soundBarPos[i], Color.White);
                 }
+
+                Globals.SpriteBatch.DrawString(musicNameFont, musicNames[musicIndex], new(480, 349), color);
             }
 
             else if (GameStates["LevelSelectionScreen"])
@@ -265,6 +271,22 @@ namespace Tetris
 
                     case "minusVolume":
                         MediaPlayer.Volume -= 0.1f;
+                        break;
+
+                    case "backMusic":
+                        if (musicIndex > 0)
+                        {
+                            musicIndex--;
+                        }
+                        Effects.PlaySoundtrack(musicIndex);
+                        break;
+
+                    case "forwardMusic":
+                        if (musicIndex < musicNames.Count - 1)
+                        {
+                            musicIndex++;
+                        }
+                        Effects.PlaySoundtrack(musicIndex);
                         break;
 
                     case "Back":
