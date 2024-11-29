@@ -46,6 +46,7 @@ namespace Tetris
             GameStates["Options"] = false;
             GameStates["LevelSelectionScreen"] = false;
             GameStates["StartGame"] = false;
+            GameStates["Paused"] = false;
         }
 
         public static void CreateMenuMainMenuButtons()
@@ -291,7 +292,18 @@ namespace Tetris
 
                     case "Back":
                         GameStates["Options"] = false;
-                        GameStates["MenuScreen"] = true;
+
+                        if (!GameStates["Paused"])
+                        {
+                            GameStates["MenuScreen"] = true;
+                        }
+
+                        else
+                        {
+                            GameStates["Paused"] = false;
+                            GameStates["StartGame"] = true;
+                        }
+
                         break;
                 }
             }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Input;
 
 
 namespace Tetris
@@ -39,9 +40,16 @@ namespace Tetris
 
             if (UIScreens.GameStates["StartGame"])
             {
-                if (!Globals.GameOver)
+                if (!Globals.GameOver && !UIScreens.GameStates["Paused"])
                 {
                     _bricksManager.Update(_map.PlayField, _map.Size);
+
+                    if (InputManager.KeybordPressed.IsKeyDown(Keys.Escape))
+                    {
+                        UIScreens.GameStates["StartGame"] = false;
+                        UIScreens.GameStates["Paused"] = true;
+                        UIScreens.GameStates["Options"] = true;
+                    }
                 }
 
                 else
