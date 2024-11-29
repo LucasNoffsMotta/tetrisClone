@@ -181,7 +181,7 @@ namespace Tetris
                     Globals.SpriteBatch.Draw(soundBar[i], soundBarPos[i], Color.White);
                 }
 
-                Globals.SpriteBatch.DrawString(musicNameFont, musicNames[musicIndex], new(480, 349), color);
+                Globals.SpriteBatch.DrawString(musicNameFont, musicNames[musicIndex], new(480, 349), Color.LightGreen);
             }
 
             else if (GameStates["LevelSelectionScreen"])
@@ -303,7 +303,6 @@ namespace Tetris
                             GameStates["Paused"] = false;
                             GameStates["StartGame"] = true;
                         }
-
                         break;
                 }
             }
