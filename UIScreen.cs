@@ -197,6 +197,7 @@ namespace Tetris
                     {
                         Globals.SpriteBatch.DrawString(menuFont, i.ToString(), levelsNumberStringArray[i], Color.Yellow);
                     }
+
                     else
                     {
                         Globals.SpriteBatch.DrawString(menuFont, i.ToString(), levelsNumberStringArray[i], Color.Red);

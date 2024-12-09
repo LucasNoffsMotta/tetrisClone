@@ -21,10 +21,7 @@ namespace Tetris
         public static bool EffectFinished = false;
         private static int TemporaryCount = 0;
         private static SpriteFont font = Globals.Content.Load<SpriteFont>("File");
-        //private static Song music1 = Globals.Content.Load<Song>("tetris-theme-korobeiniki-rearranged-arr-for-strings-185592");
-        //private static Song music2 = Globals.Content.Load<Song>("cossack-dance-edm-russian-tetris-electronika-151723");
-        //private static Song music3 = Globals.Content.Load<Song>("rasputin-russia-tetris-game-cossack-puzzle-soundtrack-mystery-148250");
-        //private static Song music4 = Globals.Content.Load<Song>("tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978");
+
 
         public static List<Song> songs = new List<Song> {LoadMusic("tetris-theme-korobeiniki-rearranged-arr-for-strings-185592"),
             LoadMusic("cossack-dance-edm-russian-tetris-electronika-151723"),
@@ -46,7 +43,7 @@ namespace Tetris
             nextRowCount += addToNextRouwCount;
 
 
-            if ((int)nextRowCount < (int)bricks.Count)
+            if ((int)nextRowCount < (int)bricks.Count && bricks[(int)nextRowCount].mapPos.y <= 20)
             {
                 bricks[(int)nextRowCount].Texture = gameOvertexture;
             }

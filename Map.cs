@@ -11,6 +11,7 @@ namespace Tetris
     public class Map
     {
         public readonly Point Size = new Point(40, 40);
+
         public Square[,] PlayField;
         public Point MapSize { get; private set; }
         public Point SquareSize { get; private set; }
@@ -25,18 +26,15 @@ namespace Tetris
 
             int mapY = -20;
 
-
             //Visible map
             for (int y = 0; y < Size.Y; y++)
             {
                 for (int x = 0; x < Size.X; x++)
                 {
                     PlayField[x, y] = new(Globals.Content.Load<Texture2D>("BackGroundTile2"), MapToScreen(x, y));
-
                 }
             }
         }
-
 
         public void Draw()
         {
