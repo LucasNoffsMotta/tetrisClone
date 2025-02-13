@@ -201,6 +201,7 @@ namespace Tetris
                             boundBox[i, j].X--;
                         }
                     }
+
                     freePiecesLeft = 0;
                     freePiecesRight = 0;
                     moveCounting = true;                 
