@@ -5,8 +5,7 @@
     <em>desenvolvimento de jogos 2D</em>, <em>programação orientada a objetos</em> e <em>algoritmos</em>.
   </p>
   <p>
-    O projeto foi desenvolvido <strong>exclusivamente para fins educacionais</strong> e 
-    <u>não utilizou ajuda de inteligência artificial</u> para a produção de código.
+    O projeto foi desenvolvido <strong>exclusivamente para fins educacionais
   </p>
   <h3>Referências Utilizadas</h3>
   <ul>
