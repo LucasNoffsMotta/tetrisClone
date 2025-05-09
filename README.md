@@ -1,7 +1,7 @@
 <section style="font-family: Arial, sans-serif; line-height: 1.6;">
   <h2>Clone de Tetris</h2>
   <p>
-    Este é um <strong>clone do jogo Tetris</strong> criado para aprofundar meus conhecimentos em 
+    Projeto de <strong>clone do jogo Tetris</strong> criado para aprofundar meus conhecimentos em 
     <em>desenvolvimento de jogos 2D</em>, <em>programação orientada a objetos</em> e <em>algoritmos</em>.
   </p>
   <p>
