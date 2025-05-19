@@ -45,7 +45,6 @@ namespace Tetris
             scores.Clear();
             levels.Clear();
 
-
             for (int i = 0; i < jsonFormatPlayerData.Count; i++)
             {
                 scores.Add(int.Parse(jsonFormatPlayerData[i]["score"]));

@@ -5,8 +5,9 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Tetris.Miscellanea;
 
-namespace Tetris
+namespace Tetris.Engine
 {
     public static class LevelManager
     {
@@ -21,7 +22,7 @@ namespace Tetris
             }
         }
 
-        public static Dictionary<int,float> SpeedData()
+        public static Dictionary<int, float> SpeedData()
         {
             speedDictionary[0] = 0.8f;
             speedDictionary[1] = 0.71f;

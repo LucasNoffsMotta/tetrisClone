@@ -11,10 +11,10 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tetris
+namespace Tetris.Engine
 {
-     public static class InputManager
-     {
+    public static class InputManager
+    {
         public static Vector2 direction;
         public static KeyboardState KeybordPressed;
         public static Vector2 Direction => direction;
@@ -30,7 +30,7 @@ namespace Tetris
         public static void Update()
         {
             direction = Vector2.Zero;
-            
+
 
             KeybordPressed = Keyboard.GetState();
             var mouseState = Mouse.GetState();
@@ -39,5 +39,5 @@ namespace Tetris
             MouseRect = new(mouseState.Position.X, mouseState.Position.Y, 1, 1);
             _lastMouseState = mouseState;
         }
-     }
+    }
 }

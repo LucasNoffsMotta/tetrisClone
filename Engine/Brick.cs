@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 
 
-namespace Tetris
+namespace Tetris.Engine
 {
     public class Brick : Square
     {
@@ -64,8 +64,8 @@ namespace Tetris
         public void CheckFallColision(Square[,] PlayField)
         {
             if (Rectangle.Bottom >= Globals.PlayFieldSize.Y + Globals.PlayFieldStartPos.Y)
-            {                
-                 canMoveDownFloor = false;                
+            {
+                canMoveDownFloor = false;
             }
 
             if (Rectangle.Bottom < Globals.PlayFieldSize.Y + Globals.PlayFieldStartPos.Y)
@@ -124,7 +124,7 @@ namespace Tetris
             CheckStopCondition(fallTrigger, fallSpeed);
             CheckMoveSides(PlayField);
             UpdateMapPos();
-           
+
         }
 
         public void Draw()

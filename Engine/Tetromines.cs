@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 
 
-namespace Tetris
+namespace Tetris.Engine
 {
     public class Tetromines
     {
@@ -33,7 +33,7 @@ namespace Tetris
 
             if (!display)
             {
-                initialPos = (int)random.Next(0, (Globals.PlayFieldSize.X / 32) - 4);
+                initialPos = random.Next(0, Globals.PlayFieldSize.X / 32 - 4);
                 CreateBricks(bricktype);
                 dropSpeed = LevelManager.SpeedData();
                 alive = true;
@@ -44,14 +44,14 @@ namespace Tetris
                 fallCount = dropSpeed[Globals.Level];
                 totalTimeToMoveSides = 0.5f;
                 sideMoveCount = 0;
-                sideMoveAddToCount = 0.1f;               
+                sideMoveAddToCount = 0.1f;
                 softDropScoring = false;
                 dropScore = 0;
                 canMoveDown = true;
                 (_leftBound, _rightBound) = GetBounds();
                 totalPieces = bricks.Count;
                 freePiecesLeft = 0;
-                freePiecesRight = 0;              
+                freePiecesRight = 0;
                 if (bricktype != 'O') { CreateBoundBox(); }
             }
 
@@ -204,7 +204,7 @@ namespace Tetris
 
                     freePiecesLeft = 0;
                     freePiecesRight = 0;
-                    moveCounting = true;                 
+                    moveCounting = true;
                 }
             }
 
@@ -227,9 +227,9 @@ namespace Tetris
                     }
                     freePiecesLeft = 0;
                     freePiecesRight = 0;
-                    moveCounting = true;                
+                    moveCounting = true;
                 }
-               
+
             }
             (_leftBound, _rightBound) = GetBounds();
         }
@@ -291,7 +291,7 @@ namespace Tetris
             {
                 for (int i = 0; i < bricks.Count; i++)
                 {
-                    bricks[i].Rectangle.Y += 96;              
+                    bricks[i].Rectangle.Y += 96;
                     bricks[i].UpdateMapPos();
                 }
 
@@ -304,7 +304,7 @@ namespace Tetris
                 }
                 pieceOnField = true;
                 canRespawn = false;
-             
+
             }
         }
 
@@ -341,7 +341,7 @@ namespace Tetris
                 }
             }
 
-               
+
 
             if (_leftBound <= 0) { canMoveLeft = false; }
             if (_rightBound >= 10) { canMoveRight = false; }
@@ -360,8 +360,8 @@ namespace Tetris
         {
             if (bricktype != 'O')
             {
-                  
-                if (boundBox[boxSize - 1, 0].X < 10 && (boundBox[0, 0].X >= 0) && boundBox[0, boxSize - 1].Y < 20 && boundBox[0,0].Y >= 0)
+
+                if (boundBox[boxSize - 1, 0].X < 10 && boundBox[0, 0].X >= 0 && boundBox[0, boxSize - 1].Y < 20 && boundBox[0, 0].Y >= 0)
                 {
                     CheckRotationCondition(PlayField);
 
@@ -370,13 +370,13 @@ namespace Tetris
                         {
                             CreateObjects.ClockWiseRotate(bricks, boundBox, boxSize, PlayField);
                             timerCounting = true;
-                        }                                         
+                        }
                     }
 
                     if (InputManager.KeybordPressed.IsKeyDown(Keys.Z) && !timerCounting && rotateCounter)
                     {
-                             CreateObjects.CounterWiseRotate(bricks, boundBox, boxSize, PlayField);                             
-                             timerCounting = true; 
+                        CreateObjects.CounterWiseRotate(bricks, boundBox, boxSize, PlayField);
+                        timerCounting = true;
                     }
                 }
             }
@@ -406,7 +406,7 @@ namespace Tetris
                 bricks[i].Update(PlayField, canMoveLeft, canMoveRight, fallTrigger, TotalTimeBeforeDrop);
             }
 
-            CheckFallColision(PlayField, Size);         
+            CheckFallColision(PlayField, Size);
         }
     }
 }
