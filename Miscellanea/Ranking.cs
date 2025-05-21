@@ -20,11 +20,11 @@ namespace Tetris.Miscellanea
 
         public static void Draw()
         {
-            if (DataHelper.scores.Count > 0 && DataHelper.scores.Count >= 3)
+            if (DataHelper.ranking.Count > 0 && DataHelper.ranking.Count >= 3)
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    Globals.SpriteBatch.DrawString(font, DataHelper.scores[i].ToString(), rankingPositions[i], Color.White);
+                    Globals.SpriteBatch.DrawString(font, DataHelper.ranking[i].Score.ToString(), rankingPositions[i], Color.White);
                 }
             }
         }

@@ -31,6 +31,7 @@ namespace Tetris.Engine
             Globals.LinesCleaned = 0;
             Effects.PlaySoundtrack(UIScreens.musicIndex);
             DataHelper.LoadJson();
+            DataHelper.LoadJsonAsync();
         }
 
         public void Update(GameTime gt)

@@ -57,6 +57,7 @@ namespace Tetris.Engine
             DataHelper.SaveScore();
             DataHelper.SaveScoreOnAPI();
             DataHelper.LoadJson();
+            DataHelper.LoadJsonAsync();
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
             Globals.Level = 0;

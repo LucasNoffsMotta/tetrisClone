@@ -11,20 +11,20 @@ namespace Tetris.ExternalAPI
 {
     public class APICallercs
     {
-        public async Task<ScoreData> GetScoresAsync()
+        public async Task<string> GetScoresAsync()
         {
             APIHelper.InitializeAPIClient();
-            ScoreData scoreEntity = new ScoreData();
+            string responseString = string.Empty;
 
             using (HttpResponseMessage response = await APIHelper.APIClient.GetAsync(APIHelper.APIClient.BaseAddress))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                     string responseString = await response.Content.ReadAsStringAsync();
-                     scoreEntity = JsonConvert.DeserializeObject<ScoreData>(responseString);
+                     responseString = await response.Content.ReadAsStringAsync();
                 }
             }
-            return scoreEntity;
+
+            return responseString;
         }
 
         public async Task<bool> PostScoreAsync(ScoreData obj)

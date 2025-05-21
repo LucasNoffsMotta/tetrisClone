@@ -25,8 +25,6 @@ namespace Tetris.Miscellanea
         //Novo
         public static List<ScoreData> ranking = new List<ScoreData>();
 
-
-
         public static void LoadJson()
         {
             if (!File.Exists(fileName))
@@ -34,6 +32,18 @@ namespace Tetris.Miscellanea
                 CreateJson();
             }
             ReadFromJson();
+        }
+
+        public static async void LoadJsonAsync()
+        {
+            APICallercs apICallercs = new APICallercs();
+            string response = await apICallercs.GetScoresAsync();
+            if (response != null)
+            {
+                ranking = JsonConvert.DeserializeObject<List<ScoreData>>(response);
+                
+                ranking.OrderBy(obj => obj.Score).ToList();
+            }
         }
 
         public static void ReadFromJson()
@@ -62,7 +72,6 @@ namespace Tetris.Miscellanea
             levels.Reverse();
         }
 
-
         public static void SaveScore()
         {
             jsonFormatPlayerData.Clear();
@@ -77,13 +86,11 @@ namespace Tetris.Miscellanea
 
         public static async void SaveScoreOnAPI()
         {
-
             ScoreData scoreData = new ScoreData();
             scoreData.Score = Globals.Score.ToString();
             scoreData.Level = Globals.Level.ToString();
             APICallercs apiCaller = new APICallercs();
-            await apiCaller.PostScoreAsync(scoreData);
-        
+            await apiCaller.PostScoreAsync(scoreData);   
         }
 
         public static void CreateJson()
