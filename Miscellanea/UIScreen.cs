@@ -8,12 +8,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tetris.Engine;
 
-namespace Tetris
+namespace Tetris.Miscellanea
 {
     public static class UIScreens
     {
-        public static Texture2D startScreen =  Globals.Content.Load<Texture2D>("startScreen");
+        public static Texture2D startScreen = Globals.Content.Load<Texture2D>("startScreen");
         public static Texture2D mainMenuUI = Globals.Content.Load<Texture2D>("mainMenuScreen");
         public static Texture2D hoverSurface = Globals.Content.Load<Texture2D>("hoverSurface");
         public static Texture2D levelScreen = Globals.Content.Load<Texture2D>("levelScreen");
@@ -34,8 +35,8 @@ namespace Tetris
         private static List<Texture2D> soundBar = new List<Texture2D>();
         private static Vector2 soundBarinitialpos = new(435, 200);
         private static List<Vector2> soundBarPos = new List<Vector2>();
-        private static List<string> musicNames = new List<string> { "Music 1", "Music 2", "Music 3", "Music 4"};
-        public static int musicIndex = 0;  
+        private static List<string> musicNames = new List<string> { "Music 1", "Music 2", "Music 3", "Music 4" };
+        public static int musicIndex = 0;
 
 
 
@@ -58,7 +59,7 @@ namespace Tetris
 
         public static void CreateLevelMenuButtons()
         {
-            Vector2 firstpos = new Vector2(214,464);
+            Vector2 firstpos = new Vector2(214, 464);
             Vector2 numberStringPos = new Vector2(240, 470);
 
             for (int i = 0; i < 10; i++)
@@ -74,7 +75,7 @@ namespace Tetris
                 LevelMenuButtons[i.ToString()] = new(firstpos.X, firstpos.Y);
                 levelsNumberStringArray[i] = numberStringPos;
                 firstpos.X += 86;
-                numberStringPos.X += 85;           
+                numberStringPos.X += 85;
             }
         }
 
@@ -84,7 +85,7 @@ namespace Tetris
             optionsButtons["minusVolume"] = new(410, 190);
             optionsButtons["backMusic"] = new(418, 345);
             optionsButtons["forwardMusic"] = new(600, 345);
-            optionsButtons["Back"] = new(427,507);
+            optionsButtons["Back"] = new(427, 507);
         }
 
 
@@ -101,12 +102,13 @@ namespace Tetris
 
         public static void Draw()
         {
-            
+
             if (GameStates["StartScreen"])
             {
                 Globals.SpriteBatch.Draw(startScreen, new Vector2(0, 0), Color.White);
                 menuBlinkCounter += 0.05f;
                 Globals.SpriteBatch.DrawString(menuFont, "Press Enter to Start", new Vector2(280, 470), Color.DarkTurquoise * colorMultiplicator);
+
                 if (menuBlinkCounter > 1f)
                 {
                     menuBlinkCounter = 0f;
@@ -117,9 +119,9 @@ namespace Tetris
                             break;
                         case 1:
                             colorMultiplicator = 0;
-                            break;                            
+                            break;
                     }
-                }             
+                }
             }
 
             else if (GameStates["MenuScreen"])
@@ -146,7 +148,7 @@ namespace Tetris
                 foreach (KeyValuePair<string, Vector2> button in optionsButtons)
                 {
                     Rectangle buttonPos = new Rectangle((int)button.Value.X, (int)button.Value.Y, 30, 30);
-                    if(buttonPos.Contains(InputManager.MouseRect.X, InputManager.MouseRect.Y))
+                    if (buttonPos.Contains(InputManager.MouseRect.X, InputManager.MouseRect.Y))
                     {
                         color = Color.Yellow;
                     }
@@ -155,7 +157,7 @@ namespace Tetris
                     {
                         color = Color.Aquamarine;
                     }
-                   
+
                     switch (button.Key)
                     {
                         case "plusVolume":
@@ -173,7 +175,7 @@ namespace Tetris
                         case "forwardMusic":
                             Globals.SpriteBatch.DrawString(optionsFont, ">", button.Value, color);
                             break;
-                    }                   
+                    }
                 }
 
                 for (int i = 0; i < volumeDisplay; i++)
@@ -188,10 +190,10 @@ namespace Tetris
             {
                 Globals.SpriteBatch.Draw(levelScreen, new Vector2(0, 0), Color.White);
 
-                for (int i = 0; i < 10; i ++)
+                for (int i = 0; i < 10; i++)
                 {
-                 
-                    Rectangle hoverLevelButton = new Rectangle ((int)LevelMenuButtons[i.ToString()].X, (int)LevelMenuButtons[i.ToString()].Y, 75,75);
+
+                    Rectangle hoverLevelButton = new Rectangle((int)LevelMenuButtons[i.ToString()].X, (int)LevelMenuButtons[i.ToString()].Y, 75, 75);
 
                     if (hoverLevelButton.Contains(InputManager.MouseRect.X, InputManager.MouseRect.Y))
                     {
@@ -202,7 +204,7 @@ namespace Tetris
                     {
                         Globals.SpriteBatch.DrawString(menuFont, i.ToString(), levelsNumberStringArray[i], Color.Red);
                     }
-                    
+
                 }
 
             }
@@ -222,7 +224,7 @@ namespace Tetris
             else if (GameStates["MenuScreen"])
             {
                 string clicked = "";
-                foreach (KeyValuePair<string,Vector2> button in MainMenuButtons)
+                foreach (KeyValuePair<string, Vector2> button in MainMenuButtons)
                 {
                     Rectangle buttonPos = new Rectangle((int)button.Value.X, (int)button.Value.Y, 300, 50);
 
@@ -242,14 +244,14 @@ namespace Tetris
 
                     case "Options":
                         GameStates["MenuScreen"] = false;
-                        GameStates["Options"] = true;                       
+                        GameStates["Options"] = true;
                         break;
 
                     case "Exit":
                         GameStates["MenuScreen"] = false;
                         GameStates["StartScreen"] = true;
                         break;
-                }               
+                }
             }
 
             else if (GameStates["Options"])
@@ -268,7 +270,7 @@ namespace Tetris
                 switch (clicked)
                 {
                     case "plusVolume":
-                        MediaPlayer.Volume += 0.1f;                        
+                        MediaPlayer.Volume += 0.1f;
                         break;
 
                     case "minusVolume":
@@ -322,7 +324,7 @@ namespace Tetris
                         GameStates["StartGame"] = true;
                         break;
                     }
-                }             
+                }
             }
         }
     }

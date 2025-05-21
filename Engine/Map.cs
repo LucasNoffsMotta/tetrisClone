@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 
 
-namespace Tetris
+namespace Tetris.Engine
 {
     public class Map
     {
@@ -42,7 +42,7 @@ namespace Tetris
             {
                 for (int y = 0; y < Size.Y; y++)
                 {
-                     PlayField[x, y].Draw();          
+                    PlayField[x, y].Draw();
                 }
             }
         }

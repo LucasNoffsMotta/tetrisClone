@@ -32,7 +32,6 @@ namespace Tetris.Engine
 
         public static int Level { get; set; }
 
-
         public static int LinesCleaned { get; set; }
 
         public static void Update(GameTime gt)

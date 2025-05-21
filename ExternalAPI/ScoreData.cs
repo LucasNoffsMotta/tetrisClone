@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Tetris.ExternalAPI
 {
-    internal class APICaller
+    public class ScoreData
     {
+        public string Score { get; set; }
+        public string Level { get; set; }
     }
 }

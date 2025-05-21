@@ -3,9 +3,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Input;
+using Tetris.Miscellanea;
 
 
-namespace Tetris
+namespace Tetris.Engine
 {
     public class GameManager
     {
@@ -69,7 +70,7 @@ namespace Tetris
             }
         }
 
-    
+
 
         public void Draw()
         {
@@ -92,7 +93,7 @@ namespace Tetris
                 Globals.SpriteBatch.DrawString(font, Globals.Level.ToString(), new(240, 325), Color.White);
                 Ranking.Draw();
             }
-           
+
 
 
             if (Effects.EffectFinished)

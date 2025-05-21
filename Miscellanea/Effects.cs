@@ -10,7 +10,7 @@ using System.Threading;
 using Tetris.Engine;
 
 
-namespace Tetris
+namespace Tetris.Miscellanea
 {
     public static class Effects
     {
@@ -26,7 +26,7 @@ namespace Tetris
 
         public static List<Song> songs = new List<Song> {LoadMusic("tetris-theme-korobeiniki-rearranged-arr-for-strings-185592"),
             LoadMusic("cossack-dance-edm-russian-tetris-electronika-151723"),
-            LoadMusic("rasputin-russia-tetris-game-cossack-puzzle-soundtrack-mystery-148250"), 
+            LoadMusic("rasputin-russia-tetris-game-cossack-puzzle-soundtrack-mystery-148250"),
             LoadMusic("tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978")};
 
         public static float musicVolume = 1f;
@@ -44,13 +44,13 @@ namespace Tetris
             nextRowCount += addToNextRouwCount;
 
 
-            if ((int)nextRowCount < (int)bricks.Count && bricks[(int)nextRowCount].mapPos.y <= 20)
+            if ((int)nextRowCount < bricks.Count && bricks[(int)nextRowCount].mapPos.y <= 20)
             {
                 bricks[(int)nextRowCount].Texture = gameOvertexture;
             }
 
-  
-            else if (nextRowCount >= bricks.Count) { nextRowCount = 0; TemporaryCount++;  EffectFinished = true; }
+
+            else if (nextRowCount >= bricks.Count) { nextRowCount = 0; TemporaryCount++; EffectFinished = true; }
         }
 
         public static void PlaySoundtrack(int musicIndex)
@@ -67,7 +67,7 @@ namespace Tetris
 
         public static void DrawGameOver()
         {
-            Globals.SpriteBatch.DrawString(font, "Game Over", new Vector2(415,320), Microsoft.Xna.Framework.Color.Red);
+            Globals.SpriteBatch.DrawString(font, "Game Over", new Vector2(415, 320), Microsoft.Xna.Framework.Color.Red);
         }
     }
 }

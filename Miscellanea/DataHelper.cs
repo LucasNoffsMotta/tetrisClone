@@ -10,8 +10,10 @@ using System.Diagnostics;
 using SharpDX.MediaFoundation.DirectX;
 using Newtonsoft.Json;
 using System.Security.Cryptography.X509Certificates;
+using Tetris.Engine;
+using Tetris.ExternalAPI;
 
-namespace Tetris
+namespace Tetris.Miscellanea
 {
     public static class DataHelper
     {
@@ -20,11 +22,14 @@ namespace Tetris
         private static string fileName = "playerData.json";
         public static List<int> scores = new List<int>();
         public static List<int> levels = new List<int>();
-        
+        //Novo
+        public static List<ScoreData> ranking = new List<ScoreData>();
+
+
 
         public static void LoadJson()
         {
-            if(!File.Exists(fileName))
+            if (!File.Exists(fileName))
             {
                 CreateJson();
             }
@@ -67,7 +72,18 @@ namespace Tetris
             jsonFormatPlayerData.Add(playerData);
             string jsonData = System.Text.Json.JsonSerializer.Serialize(jsonFormatPlayerData);
             File.Delete(fileName);
-            File.WriteAllText(fileName, jsonData); 
+            File.WriteAllText(fileName, jsonData);
+        }
+
+        public static async void SaveScoreOnAPI()
+        {
+
+            ScoreData scoreData = new ScoreData();
+            scoreData.Score = Globals.Score.ToString();
+            scoreData.Level = Globals.Level.ToString();
+            APICallercs apiCaller = new APICallercs();
+            await apiCaller.PostScoreAsync(scoreData);
+        
         }
 
         public static void CreateJson()

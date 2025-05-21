@@ -5,7 +5,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Tetris
+namespace Tetris.Engine
 {
     public class BricksManager
     {
@@ -71,7 +71,7 @@ namespace Tetris
                     currentBrick = brickObjects[brickIndex];
                 }
 
-                catch (System.ArgumentOutOfRangeException)
+                catch (ArgumentOutOfRangeException)
                 {
                     CreateBriks();
                     currentBrick = brickObjects[brickIndex];

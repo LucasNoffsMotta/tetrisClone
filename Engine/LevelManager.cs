@@ -41,7 +41,7 @@ namespace Tetris.Engine
 
 
 
-        public static void ReestartGame(Square[,] PlayField, BricksManager _bricksManager)
+        public static async void ReestartGame(Square[,] PlayField, BricksManager _bricksManager)
         {
             for (int x = 0; x < PlayField.GetLength(0); x++)
             {
@@ -55,6 +55,7 @@ namespace Tetris.Engine
             _bricksManager.brickObjects.Clear();
             _bricksManager.StartBricks();
             DataHelper.SaveScore();
+            DataHelper.SaveScoreOnAPI();
             DataHelper.LoadJson();
             Globals.Score = 0;
             Globals.LinesCleaned = 0;

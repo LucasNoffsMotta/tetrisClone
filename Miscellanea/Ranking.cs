@@ -6,9 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tetris.Engine;
-using Tetris.Miscellanea;
 
-namespace Tetris
+namespace Tetris.Miscellanea
 {
     public static class Ranking
     {
@@ -16,8 +15,8 @@ namespace Tetris
 
         private static readonly SpriteFont font = Globals.Content.Load<SpriteFont>("File");
         private static Vector2 initialRankingpos = new(710, 470);
-        private static Vector2 [] rankingPositions = [new(initialRankingpos.X, initialRankingpos.Y), new(initialRankingpos.X, initialRankingpos.Y + 50), new(initialRankingpos.X, initialRankingpos.Y + 100)];
-        
+        private static Vector2[] rankingPositions = [new(initialRankingpos.X, initialRankingpos.Y), new(initialRankingpos.X, initialRankingpos.Y + 50), new(initialRankingpos.X, initialRankingpos.Y + 100)];
+
 
         public static void Draw()
         {
@@ -27,7 +26,7 @@ namespace Tetris
                 {
                     Globals.SpriteBatch.DrawString(font, DataHelper.scores[i].ToString(), rankingPositions[i], Color.White);
                 }
-            }           
+            }
         }
     }
 }
