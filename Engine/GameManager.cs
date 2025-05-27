@@ -30,8 +30,7 @@ namespace Tetris.Engine
             Globals.Score = 0;
             Globals.LinesCleaned = 0;
             Effects.PlaySoundtrack(UIScreens.musicIndex);
-            DataHelper.LoadJson();
-            DataHelper.LoadJsonAsync();
+            DataHelper.LoadRanking();
         }
 
         public void Update(GameTime gt)

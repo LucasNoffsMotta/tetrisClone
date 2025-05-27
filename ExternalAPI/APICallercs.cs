@@ -14,16 +14,25 @@ namespace Tetris.ExternalAPI
         public async Task<string> GetScoresAsync()
         {
             APIHelper.InitializeAPIClient();
+
             string responseString = string.Empty;
 
-            using (HttpResponseMessage response = await APIHelper.APIClient.GetAsync(APIHelper.APIClient.BaseAddress))
+            try
             {
-                if (response.IsSuccessStatusCode)
+                using (HttpResponseMessage response = await APIHelper.APIClient.GetAsync(APIHelper.APIClient.BaseAddress))
                 {
-                     responseString = await response.Content.ReadAsStringAsync();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        responseString = await response.Content.ReadAsStringAsync();
+                    }
                 }
             }
 
+            catch (Exception ex)           
+            {
+                return responseString;
+            }
+        
             return responseString;
         }
 
@@ -40,6 +49,5 @@ namespace Tetris.ExternalAPI
                 return false;
             }
         }
-
     }
 }
