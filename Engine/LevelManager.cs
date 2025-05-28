@@ -35,10 +35,8 @@ namespace Tetris.Engine
             speedDictionary[8] = 6f;
             speedDictionary[9] = 8f;
             speedDictionary[10] = 9.6f;
-
             return speedDictionary;
         }
-
 
 
         public static void ReestartGame(Square[,] PlayField, BricksManager _bricksManager)

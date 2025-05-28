@@ -28,9 +28,10 @@ namespace Tetris.ExternalAPI
                 }
             }
 
+            //Caso a API nao esteja rodando, nao aparece score nenhum
             catch (Exception ex)           
             {
-                return responseString;
+               //TODO
             }
         
             return responseString;

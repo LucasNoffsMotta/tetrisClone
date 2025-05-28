@@ -27,16 +27,17 @@ namespace Tetris.Miscellanea
             string response = await apICallercs.GetScoresAsync();
             if (response != null)
             {
-                ranking = JsonConvert.DeserializeObject<List<ScoreData>>(response);
-
-                //TEST
-                foreach(var v in ranking)
+                try
                 {
-                    Debug.WriteLine(v.Score);
+                    ranking = JsonConvert.DeserializeObject<List<ScoreData>>(response);
                 }
 
-                Debug.WriteLine("Finished");
+                catch(Exception ex)
+                {
+                    ranking[0] = new ScoreData() { Score = "Not connected" };
+                }
             }
+
         }
 
         public static async void SaveRanking()
