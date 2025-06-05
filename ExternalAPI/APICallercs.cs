@@ -28,12 +28,11 @@ namespace Tetris.ExternalAPI
                 }
             }
 
-            //Caso a API nao esteja rodando, nao aparece score nenhum
-            catch (Exception ex)           
+            catch(Exception ex)
             {
-               //TODO
+                return string.Empty;
             }
-        
+          
             return responseString;
         }
 

@@ -44,6 +44,7 @@ namespace Tetris.Miscellanea
         {
             GameStates["StartScreen"] = true;
             GameStates["MenuScreen"] = false;
+            GameStates["NameInputScreen"] = false;
             GameStates["Options"] = false;
             GameStates["LevelSelectionScreen"] = false;
             GameStates["StartGame"] = false;
@@ -186,6 +187,11 @@ namespace Tetris.Miscellanea
                 Globals.SpriteBatch.DrawString(musicNameFont, musicNames[musicIndex], new(480, 349), Color.LightGreen);
             }
 
+            else if (GameStates["NameInputScreen"])
+            {
+                PlayerNameInputScreen.Draw();
+            }
+
             else if (GameStates["LevelSelectionScreen"])
             {
                 Globals.SpriteBatch.Draw(levelScreen, new Vector2(0, 0), Color.White);
@@ -206,7 +212,6 @@ namespace Tetris.Miscellanea
                     }
 
                 }
-
             }
         }
 
@@ -217,9 +222,11 @@ namespace Tetris.Miscellanea
                 if (InputManager.KeybordPressed.IsKeyDown(Keys.Enter))
                 {
                     GameStates["StartScreen"] = false;
-                    GameStates["MenuScreen"] = true;
+                    GameStates["NameInputScreen"] = true;
+                    GameStates["MenuScreen"] = false;
                 }
             }
+
 
             else if (GameStates["MenuScreen"])
             {

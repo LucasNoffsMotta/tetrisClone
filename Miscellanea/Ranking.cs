@@ -12,11 +12,9 @@ namespace Tetris.Miscellanea
     public static class Ranking
     {
         //710,470
-
         private static readonly SpriteFont font = Globals.Content.Load<SpriteFont>("File");
         private static Vector2 initialRankingpos = new(710, 470);
         private static Vector2[] rankingPositions = [new(initialRankingpos.X, initialRankingpos.Y), new(initialRankingpos.X, initialRankingpos.Y + 50), new(initialRankingpos.X, initialRankingpos.Y + 100)];
-
 
         public static void Draw()
         {

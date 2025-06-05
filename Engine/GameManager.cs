@@ -15,7 +15,6 @@ namespace Tetris.Engine
         private readonly Texture2D background;
         private readonly SpriteFont font;
 
-
         public GameManager()
         {
             _map = new Map();
@@ -69,7 +68,6 @@ namespace Tetris.Engine
                 UIScreens.Update();
             }
         }
-
 
 
         public void Draw()
