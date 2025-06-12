@@ -18,10 +18,12 @@ namespace Tetris.Miscellanea
             .Concat(Enumerable.Range('A', 26).Select(c => ((char)c).ToString()))
             .Concat(Enumerable.Range('a', 26).Select(c => ((char)c).ToString()))
             .ToArray();
-        private const int pressingInterval = 5;
-        private int timeCountSinceLastPressed = 0;
 
-        private void ParseInputedString(List<string> input, Keys tempKey)
+        private const float pressingInterval = 4f;
+        private float timeCountSinceLastPressed = 0;
+        private Keys lastPressed = new Keys();
+
+        private void ParseInputedString(List<string> input, Keys? tempKey)
         {
             if (regularKeys.Contains<string>(tempKey.ToString()))
             {
@@ -47,30 +49,45 @@ namespace Tetris.Miscellanea
             }
         }
 
-        private void GetInputIntoList(List<string> input, Keys tempKey)
+        private void GetInputIntoList(List<string> input, Keys? tempKey)
         {
             string tempKeyString = tempKey.ToString();
-            input.Add(InputManager.KeybordPressed.CapsLock ? tempKeyString.ToUpper()  : tempKeyString.ToLower());
+            input.Add(InputManager.KeybordPressed.CapsLock ? tempKeyString.ToUpper() : tempKeyString.ToLower());
         }
 
-        private Keys[] GetInputwithInterval()
+        //Interval only exists if the same key is being pressed
+        //TODO: Improve this method
+        private Keys? GetInputWithInterval()
         {
-            Keys[] emptyArray = new Keys[0];
-            timeCountSinceLastPressed++;
-
-            if (timeCountSinceLastPressed >= pressingInterval)
+            Keys[] currentKeys = InputManager.KeybordPressed.GetPressedKeys(); 
+            
+            if (currentKeys.Length > 0)
             {
-                timeCountSinceLastPressed = 0;
-                return InputManager.KeybordPressed.GetPressedKeys();
-            }
+                Keys beingPressed = currentKeys[0];
 
-            return emptyArray;
+                if (lastPressed != null && lastPressed == beingPressed)
+                {
+                    timeCountSinceLastPressed += 0.5f;
+
+                    if (timeCountSinceLastPressed >= pressingInterval)
+                    {
+                        timeCountSinceLastPressed = 0;
+                        return lastPressed;
+                    }
+                }
+
+                else
+                {
+                    lastPressed = beingPressed;
+                }
+            }
+            return null;
         }
 
         public List<string> GetInputList(List<string> input)
         {
-            Keys[] keys = GetInputwithInterval();
-            if (keys.Length != 0) { ParseInputedString(input, keys[0]); }      
+            Keys? key = GetInputWithInterval();
+            ParseInputedString(input, key);     
             return input;
         }
     }
