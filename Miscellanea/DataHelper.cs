@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Security.Cryptography.X509Certificates;
 using Tetris.Engine;
 using Tetris.ExternalAPI;
+using Tetris.ExternalAPI.Models;
 
 namespace Tetris.Miscellanea
 {
@@ -21,8 +22,7 @@ namespace Tetris.Miscellanea
         public static List<ScoreData> ranking = new List<ScoreData>();
 
         public static async void LoadRanking()
-        {
-            
+        {        
             APICallercs apICallercs = new APICallercs();
             string response = await apICallercs.GetScoresAsync();
 
@@ -42,11 +42,12 @@ namespace Tetris.Miscellanea
 
         public static async void SaveRanking()
         {
-            ScoreData scoreData = new ScoreData();
-            scoreData.Score = Globals.Score.ToString();
-            scoreData.Level = Globals.Level.ToString();
+            Player player = new Player();
+            player.Name = "Teste";
+            player.Score = Globals.Score;
+            player.Level = Globals.Level;
             APICallercs apiCaller = new APICallercs();
-            await apiCaller.PostScoreAsync(scoreData);   
+            await apiCaller.PostScoreAsync(player);   
         }
     }
 }

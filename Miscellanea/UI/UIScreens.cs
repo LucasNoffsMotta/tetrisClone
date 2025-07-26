@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tetris.Engine;
 
-namespace Tetris.Miscellanea
+namespace Tetris.Miscellanea.UI
 {
     public static class UIScreens
     {
@@ -44,7 +44,7 @@ namespace Tetris.Miscellanea
         {
             GameStates["StartScreen"] = true;
             GameStates["MenuScreen"] = false;
-            GameStates["NameInputScreen"] = false;
+            //GameStates["NameInputScreen"] = false;
             GameStates["Options"] = false;
             GameStates["LevelSelectionScreen"] = false;
             GameStates["StartGame"] = false;
@@ -188,10 +188,10 @@ namespace Tetris.Miscellanea
             }
 
             ///IMPLEMENTAR TELA DE INSERIR NOME AQUI
-            else if (GameStates["NameInputScreen"])
-            {
-                PlayerNameInputScreen.Draw();
-            }
+            //else if (GameStates["NameInputScreen"])
+            //{
+            //    PlayerNameInputScreen.Draw();
+            //}
 
             else if (GameStates["LevelSelectionScreen"])
             {
@@ -211,7 +211,6 @@ namespace Tetris.Miscellanea
                     {
                         Globals.SpriteBatch.DrawString(menuFont, i.ToString(), levelsNumberStringArray[i], Color.Red);
                     }
-
                 }
             }
         }
@@ -223,8 +222,8 @@ namespace Tetris.Miscellanea
                 if (InputManager.KeybordPressed.IsKeyDown(Keys.Enter))
                 {
                     GameStates["StartScreen"] = false;
-                    GameStates["NameInputScreen"] = true;
-                    GameStates["MenuScreen"] = false;
+                    //GameStates["NameInputScreen"] = true;
+                    GameStates["MenuScreen"] = true;
                 }
             }
 

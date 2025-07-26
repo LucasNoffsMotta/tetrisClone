@@ -14,7 +14,6 @@ using Tetris.Engine;
 
 namespace Tetris.Miscellanea
 {
-
     //REFATORAR AQUI
     internal static class PlayerNameInputScreen
     {
@@ -44,7 +43,6 @@ namespace Tetris.Miscellanea
                 blinkColorMultiplier = blinkColorMultiplier == 1 ? 0 : 1;
                 typingLineBlinkCounter = 0f;
             }
-
         }
 
         public static void Draw()
