@@ -43,9 +43,10 @@ namespace Tetris.Miscellanea
         public static async void SaveRanking()
         {
             Player player = new Player();
-            player.Name = "Teste";
+            player.Name = PlayerNameInputScreen.playername;
             player.Score = Globals.Score;
             player.Level = Globals.Level;
+            player.DateTime = DateTime.Now;
             APICallercs apiCaller = new APICallercs();
             await apiCaller.PostScoreAsync(player);   
         }

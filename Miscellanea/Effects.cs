@@ -55,6 +55,8 @@ namespace Tetris.Miscellanea
 
         public static void PlaySoundtrack(int musicIndex)
         {
+            //Temporatio
+            MediaPlayer.Volume = 0;
             MediaPlayer.Play(songs[musicIndex]);
         }
 

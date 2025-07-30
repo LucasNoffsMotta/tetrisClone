@@ -188,10 +188,10 @@ namespace Tetris.Miscellanea.UI
             }
 
             ///IMPLEMENTAR TELA DE INSERIR NOME AQUI
-            //else if (GameStates["NameInputScreen"])
-            //{
-            //    PlayerNameInputScreen.Draw();
-            //}
+            else if (GameStates["NameInputScreen"])
+            {
+                PlayerNameInputScreen.Draw();
+            }
 
             else if (GameStates["LevelSelectionScreen"])
             {
@@ -222,7 +222,17 @@ namespace Tetris.Miscellanea.UI
                 if (InputManager.KeybordPressed.IsKeyDown(Keys.Enter))
                 {
                     GameStates["StartScreen"] = false;
-                    //GameStates["NameInputScreen"] = true;
+                    GameStates["NameInputScreen"] = true;
+                    GameStates["MenuScreen"] = false;
+                }
+            }
+
+            else if (GameStates["NameInputScreen"])
+            {
+                if (InputManager.KeybordPressed.IsKeyDown(Keys.P))
+                {
+                    PlayerNameInputScreen.GetPlayerName();
+                    GameStates["NameInputScreen"] = false;
                     GameStates["MenuScreen"] = true;
                 }
             }

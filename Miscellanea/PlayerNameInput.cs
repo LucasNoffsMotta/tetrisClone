@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tetris.Engine;
+using Tetris.ExternalAPI.Models;
 
 namespace Tetris.Miscellanea
 {
@@ -20,7 +21,6 @@ namespace Tetris.Miscellanea
         private readonly static SpriteFont font = Globals.Content.Load<SpriteFont>("NameInputFont");
         private static Texture2D nameInputScreen = Globals.Content.Load<Texture2D>("NameInputScreen");
         private static Texture2D enterButton = Globals.Content.Load<Texture2D>("NameInputScreenEnterButton");
-        //private static Texture2D typingLine = Globals.Content.Load<Texture2D>("TypeLine");
         private static List<string> pressedKeys = new List<string>();
         private static KeybordInputParser keyParser = new KeybordInputParser();
         private static Vector2 initialNamePos = new Vector2(191, 390);
@@ -28,6 +28,7 @@ namespace Tetris.Miscellanea
         private static Texture2D typingLine = DrawShapes.CreateVerticalLine(new Vector2(190,390), new Vector2(190, 408), 1, Color.Yellow);
         private static float typingLineBlinkCounter = 0f;
         private static float blinkColorMultiplier = 0f;
+        public static string playername;
 
         private static Vector2 NewLetterPos(int index)
         {
@@ -45,6 +46,11 @@ namespace Tetris.Miscellanea
             }
         }
 
+        public static void GetPlayerName()
+        {
+            playername = String.Concat(pressedKeys);           
+        }
+
         public static void Draw()
         {
             Globals.SpriteBatch.Draw(nameInputScreen, new Vector2(0, 0), Color.White);
@@ -56,7 +62,7 @@ namespace Tetris.Miscellanea
                 Globals.SpriteBatch.DrawString(font, pressedKeys[i], NewLetterPos(i), Color.Yellow);
             }
 
-            Globals.SpriteBatch.Draw(typingLine, initialNamePos, Color.White*blinkColorMultiplier);
+            Globals.SpriteBatch.Draw(typingLine, NewLetterPos(pressedKeys.Count), Color.White*blinkColorMultiplier);
             BlinkDrawLine();      
         }
     }
