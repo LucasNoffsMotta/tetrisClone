@@ -26,7 +26,7 @@ namespace Tetris.Miscellanea
             APICallercs apICallercs = new APICallercs();
             string response = await apICallercs.GetScoresAsync();
 
-            if(response != "")
+            if(response != string.Empty)
             {
                 ranking = JsonConvert.DeserializeObject<List<ScoreData>>(response);
             }
@@ -43,7 +43,7 @@ namespace Tetris.Miscellanea
         public static async void SaveRanking()
         {
             Player player = new Player();
-            player.Name = PlayerNameInputScreen.playername;
+            //player.Name = PlayerNameInputScreen.playername;
             player.Score = Globals.Score;
             player.Level = Globals.Level;
             player.DateTime = DateTime.Now;
