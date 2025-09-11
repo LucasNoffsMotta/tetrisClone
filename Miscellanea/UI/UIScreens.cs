@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Tetris.Engine;
@@ -190,7 +191,10 @@ namespace Tetris.Miscellanea.UI
             ///IMPLEMENTAR TELA DE INSERIR NOME AQUI
             else if (GameStates["NameInputScreen"])
             {
-                PlayerNameInputScreen.Draw();
+                //PlayerNameInputScreen.Draw();
+                frmLogincs form = new frmLogincs();
+                form.Show();
+                GameStates["NameInputScreen"] = false;
             }
 
             else if (GameStates["LevelSelectionScreen"])

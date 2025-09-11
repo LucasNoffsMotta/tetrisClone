@@ -12,5 +12,6 @@ namespace Tetris.ExternalAPI.Models
         public int Score { get; set; }
         public int Level { get; set; }
         public DateTime DateTime { get; set; }
+        public bool IsOnline { get; set; }
     }
 }
