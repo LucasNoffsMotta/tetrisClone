@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
+using Tetris.ExternalAPI.Models;
 
 namespace Tetris.ExternalAPI
 {
     public class APICallercs
     {
+        private readonly string post = @"http://localhost:5135/ScoreBoard/CreateRecord";
+        private readonly string get = @"http://localhost:5135/ScoreBoard";
+
         public async Task<string> GetScoresAsync()
         {
             APIHelper.InitializeAPIClient();
@@ -19,7 +22,7 @@ namespace Tetris.ExternalAPI
 
             try
             {
-                using (HttpResponseMessage response = await APIHelper.APIClient.GetAsync(APIHelper.APIClient.BaseAddress))
+                using (HttpResponseMessage response = await APIHelper.APIClient.GetAsync(new Uri(get)))
                 {
                     if (response.IsSuccessStatusCode)
                     {
@@ -28,20 +31,19 @@ namespace Tetris.ExternalAPI
                 }
             }
 
-            //Caso a API nao esteja rodando, nao aparece score nenhum
-            catch (Exception ex)           
+            catch(Exception ex)
             {
-               //TODO
+                return string.Empty;
             }
-        
+          
             return responseString;
         }
 
-        public async Task<bool> PostScoreAsync(ScoreData obj)
+        public async Task<bool> PostScoreAsync(Player obj)
         {
             APIHelper.InitializeAPIClient();
 
-            using (HttpResponseMessage response = await APIHelper.APIClient.PostAsJsonAsync(APIHelper.APIClient.BaseAddress, obj))
+            using (HttpResponseMessage response = await APIHelper.APIClient.PostAsJsonAsync(new Uri(post), obj))
             {
                 if (response.IsSuccessStatusCode)
                 {

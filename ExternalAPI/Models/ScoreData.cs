@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tetris.ExternalAPI
+namespace Tetris.ExternalAPI.Models
 {
     public class ScoreData
     {

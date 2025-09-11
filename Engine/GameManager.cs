@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Input;
 using Tetris.Miscellanea;
+using Tetris.Miscellanea.UI;
 
 
 namespace Tetris.Engine
@@ -14,7 +15,6 @@ namespace Tetris.Engine
         public readonly BricksManager _bricksManager;
         private readonly Texture2D background;
         private readonly SpriteFont font;
-
 
         public GameManager()
         {
@@ -69,7 +69,6 @@ namespace Tetris.Engine
                 UIScreens.Update();
             }
         }
-
 
 
         public void Draw()

@@ -18,7 +18,7 @@ namespace Tetris.ExternalAPI
         public static void InitializeAPIClient()
         {
             APIClient = new HttpClient();
-            APIClient.BaseAddress = new Uri(@"http://localhost:5278/playRecords");
+            APIClient.BaseAddress = new Uri(@"http://localhost:5135/ScoreBoard/Create");
             APIClient.DefaultRequestHeaders.Accept.Clear();
             //Ira procurar apenas por JSON
             APIClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
